@@ -30,11 +30,13 @@ public class TipoNodoCommand extends BaseCommand {
 
     @Override
     public void ejecutar(String[] args, OutputStream out) {
-        if (args[0].equals("miembro"))
+        if (args[0].equals("miembro")) {
             SistemaUtil.tipo = "miembro";
-        else if (args[0].equals("fantasma"))
-            SistemaUtil.tipo ="fantasma";
-        else
+            System.out.println("Se ha asignado el tipo de nodo exitosamente");
+        }else if (args[0].equals("fantasma")) {
+            SistemaUtil.tipo = "fantasma";
+            System.out.println("Se ha asignado el tipo de nodo exitosamente");
+        }else
             write(out,"Este tipo de nodo no existe! ");
 
     }

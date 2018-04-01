@@ -35,18 +35,25 @@ public class AsignarRedCommand extends BaseCommand {
     public void ejecutar(String[] args, OutputStream out) {
         if (args.length>1){
             if (!SistemaUtil.tipo.equals("")) {
-                if (args[2].equals("member")) {
+                if (args.length==3){
+                    if (args[2].equals("miembro")) {
                     Miembro miembro = Miembro.obtenerInstancia();
                     miembro.setDireccion(args[0]);
                     miembro.setPuertopeticion(Integer.parseInt(args[1]));
                     miembro.setPuertoArchivo(Integer.parseInt(args[1]) + 1);
-                } else if (args[2].equals("center")) {
-                    Fantasma fantasma = Fantasma.obtenerInstancia();
-                    fantasma.setDireccion(args[0]);
-                    fantasma.setPuertopeticion(Integer.parseInt(args[1]));
-                } else {
-                    write(out, "Debe especificar el tipo de nodo");
+                    System.out.println("Se ha asignado la red correctamente");
+                    } else if (args[2].equals("central")) {
+                        Fantasma fantasma = Fantasma.obtenerInstancia();
+                        fantasma.setDireccion(args[0]);
+                        fantasma.setPuertopeticion(Integer.parseInt(args[1]));
+                        System.out.println("Se ha asignado la red correctamente");
+                    } else {
+                        write(out, "Debe especificar el tipo de nodo");
+                    }
+                }else{
+                    System.out.println("Faltan argumentos en la sentencia!");
                 }
+
             }else{
                 System.out.println("Debe especificar el tipo de nodo primero! ");
             }
@@ -56,26 +63,34 @@ public class AsignarRedCommand extends BaseCommand {
                 if (args[0].equals("-s"))
                 {
                     if (SistemaUtil.tipo.equals("miembro")) {
-                        System.out.println("-------------------------------------------------------");
-                        System.out.println("Sus datos de conexion son: ");
-                        System.out.println("-------------------------------------------------------");
-                        Miembro miembro = Miembro.obtenerInstancia();
-                        System.out.println("IP: " +  miembro.getDireccion());
-                        System.out.println("Hash IP: " + miembro.getHash());
-                        System.out.println("Puerto de Escucha: "+ miembro.getPuertopeticion());
-                        System.out.println("Puerto de Archivos: "+miembro.getPuertoArchivo() );
-                        System.out.println("-------------------------------------------------------");
+                        try {
+                            System.out.println("-------------------------------------------------------");
+                            System.out.println("Sus datos de conexion son: ");
+                            System.out.println("-------------------------------------------------------");
+                            Miembro miembro = Miembro.obtenerInstancia();
+                            System.out.println("IP: " + miembro.getDireccion());
+                            System.out.println("Hash IP: " + miembro.getHash());
+                            System.out.println("Puerto de Escucha: " + miembro.getPuertopeticion());
+                            System.out.println("Puerto de Archivos: " + miembro.getPuertoArchivo());
+                            System.out.println("-------------------------------------------------------");
+                        }catch (NullPointerException e){
+                            System.out.println("Aun no se han colocado los datos de red");
+                        }
                     }
 
                     if (SistemaUtil.tipo.equals("fantasma")) {
-                        System.out.println("-------------------------------------------------------");
-                        System.out.println("Sus datos de conexion son: ");
-                        System.out.println("-------------------------------------------------------");
-                        Fantasma fantasma = Fantasma.obtenerInstancia();
-                        System.out.println("IP: " +  fantasma.getDireccion());
-                        System.out.println("Hash IP: " + fantasma.getHash());
-                        System.out.println("Puerto de Escucha: "+ fantasma.getPuertopeticion());
-                        System.out.println("-------------------------------------------------------");
+                        try {
+                            System.out.println("-------------------------------------------------------");
+                            System.out.println("Sus datos de conexion son: ");
+                            System.out.println("-------------------------------------------------------");
+                            Fantasma fantasma = Fantasma.obtenerInstancia();
+                            System.out.println("IP: " + fantasma.getDireccion());
+                            System.out.println("Hash IP: " + fantasma.getHash());
+                            System.out.println("Puerto de Escucha: " + fantasma.getPuertopeticion());
+                            System.out.println("-------------------------------------------------------");
+                        }catch (NullPointerException e){
+                            System.out.println("Aun no se han colocado los datos de red");
+                        }
                     }
 
                     if (SistemaUtil.tipo.equals("")){

@@ -29,34 +29,5 @@ public class Fantasma extends Nodo {
         return instancia;
     }
 
-
-    @Override
-    public int getPuertopeticion() {
-        return 0;
-    }
-
-    @Override
-    public void setPuertopeticion(int puertopeticion) {
-
-    }
-
-    @Override
-    public String getDireccion() {
-        return null;
-    }
-
-    @Override
-    public void setDireccion(String direccion) {
-
-    }
-
-    @Override
-    public String getHash() {
-        return null;
-    }
-
-    @Override
-    public void setHash(String hash) {
-
-    }
+    
 }
