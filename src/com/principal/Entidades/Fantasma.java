@@ -29,5 +29,5 @@ public class Fantasma extends Nodo {
         return instancia;
     }
 
-    
+
 }

@@ -11,6 +11,7 @@ public class Recurso {
     private int descargas;
     private int tamano;
     private String hash;
+    private String estado;
 
     public int getId() {
         return id;
@@ -66,5 +67,13 @@ public class Recurso {
 
     public void setHash(String hash) {
         this.hash = hash;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

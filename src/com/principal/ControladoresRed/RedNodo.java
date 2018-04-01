@@ -27,26 +27,4 @@ public class RedNodo extends Thread {
 
 
 
-    /**
-     * Inicializa el hilo que se encarga de la recepcion de datos en forma
-     * de objetos serializados.
-     */
-    public void run ()
-    {
-        try {
-            Miembro nodo = Miembro.obtenerInstancia();
-            ServerSocket recepcion = new ServerSocket(nodo.getPuertopeticion());
-            //Contador de procesos;
-            int i=1;
-            //Solicitudes concurrentes:
-            while (true)
-            {
-                Socket recibo = recepcion.accept();
-                i++;
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(RedNodo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
 }
