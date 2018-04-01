@@ -1,7 +1,19 @@
 package com.principal.Entidades;
 
 /**
- * Created by Junior on 01/04/2018.
+ * Universidad Catolica Andres Bello
+ * Facultad de Ingenieria
+ * Escuela de Ingenieria Informatica
+ * Trabajo Especial de Grado
+ * ----------------------------------
+ * Tutor:
+ * --------------
+ * Wilmer Pereira
+ *
+ * Autores:
+ * --------------
+ * Garry Bruno
+ * Carlos Valero
  */
 public class Recurso {
     private int id;

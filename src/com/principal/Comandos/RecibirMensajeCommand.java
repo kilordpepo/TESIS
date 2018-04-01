@@ -48,7 +48,9 @@ public class RecibirMensajeCommand extends AsyncCommand{
                     //Mensaje que llega:
                     Object mensaje = ois.readObject();
                     //Falta ejecutar acciones dependiendo del mensaje
+                    System.out.println("LLego: "+ (String) mensaje
 
+                    );
 
                 }
 

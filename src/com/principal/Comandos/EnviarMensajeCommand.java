@@ -32,8 +32,8 @@ public class EnviarMensajeCommand extends BaseCommand {
 
     @Override
     public void ejecutar(String[] args, OutputStream out) {
-        if (args.length==2) {
-            enviarDato(args[1], args[0], 2003);
+        if (args.length==3) {
+            enviarDato(args[2], args[0], Integer.parseInt(args[1]));
         }else{
             System.out.println("La cantidad de parametros es erronea!");
         }
