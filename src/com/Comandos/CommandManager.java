@@ -34,6 +34,7 @@ public class CommandManager {
         registCommand(AsignarRedCommand.COMMAND_NAME, AsignarRedCommand.class);
         registCommand(TipoNodoCommand.COMMAND_NAME, TipoNodoCommand.class);
         registCommand(EnviarMensajeCommand.COMMAND_NAME, EnviarMensajeCommand.class);
+        registCommand(HelpCommand.COMMAND_NAME,HelpCommand.class);
     }
 
     public static synchronized CommandManager getIntance() {
