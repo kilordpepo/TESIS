@@ -1,9 +1,8 @@
-package com.principal.Comandos;
+package com.Comandos;
 
-import com.principal.Entidades.Fantasma;
-import com.principal.Entidades.Miembro;
-import com.principal.Utils.SistemaUtil;
-import com.sun.org.apache.xpath.internal.SourceTree;
+import com.Entidades.Fantasma;
+import com.Entidades.Miembro;
+import com.Utils.SistemaUtil;
 
 import java.io.OutputStream;
 

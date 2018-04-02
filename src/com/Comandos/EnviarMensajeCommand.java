@@ -1,4 +1,4 @@
-package com.principal.Comandos;
+package com.Comandos;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

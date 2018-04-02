@@ -1,4 +1,4 @@
-package com.principal.Entidades;
+package com.Entidades;
 
 /**
  * Created by Junior on 01/04/2018.

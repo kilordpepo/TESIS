@@ -1,6 +1,7 @@
-package com.principal.Comandos;
+package com.Comandos;
 
 import java.io.OutputStream;
+
 /**
  * Universidad Catolica Andres Bello
  * Facultad de Ingenieria
@@ -16,17 +17,17 @@ import java.io.OutputStream;
  * Garry Bruno
  * Carlos Valero
  */
-public class ExitCommand extends BaseCommand {
+public class OrganizarAnilloCommand extends BaseCommand{
 
-    public static final String COMMAND_NAME = "exit";
+    public static final String COMMAND_NAME = "order";
 
     @Override
     public String obtenerNombreComando() {
-        return COMMAND_NAME;
+        return null;
     }
 
     @Override
     public void ejecutar(String[] args, OutputStream out) {
-        System.exit(0);
+
     }
 }

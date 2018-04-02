@@ -1,6 +1,6 @@
-package com.principal.Comandos;
+package com.Comandos;
 
-import com.principal.Utils.SistemaUtil;
+import com.Utils.SistemaUtil;
 
 import java.io.OutputStream;
 

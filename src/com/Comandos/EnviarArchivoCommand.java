@@ -1,13 +1,11 @@
-package com.principal.Comandos;
+package com.Comandos;
 
-import com.principal.Entidades.Miembro;
-import com.principal.Entidades.Recurso;
+import com.Entidades.Miembro;
+import com.Entidades.Recurso;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Universidad Catolica Andres Bello

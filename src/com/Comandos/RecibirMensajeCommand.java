@@ -1,6 +1,6 @@
-package com.principal.Comandos;
+package com.Comandos;
 
-import com.principal.Entidades.Miembro;
+import com.Entidades.Miembro;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -8,7 +8,6 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 
 /**
  * Universidad Catolica Andres Bello

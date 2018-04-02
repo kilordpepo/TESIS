@@ -1,7 +1,6 @@
-package com.principal.Comandos;
+package com.Comandos;
 
 import java.io.OutputStream;
-import java.util.ArrayList;
 
 /**
  * Universidad Catolica Andres Bello

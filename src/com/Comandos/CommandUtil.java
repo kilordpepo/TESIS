@@ -1,4 +1,4 @@
-package com.principal.Comandos;
+package com.Comandos;
 
 import java.util.ArrayList;
 import java.util.List;

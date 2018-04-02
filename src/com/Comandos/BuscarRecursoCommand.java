@@ -1,7 +1,6 @@
-package com.principal.Comandos;
+package com.Comandos;
 
 import java.io.OutputStream;
-import java.util.ArrayList;
 
 /**
  * Created by Junior on 01/04/2018.

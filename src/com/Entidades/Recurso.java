@@ -1,4 +1,4 @@
-package com.principal.Entidades;
+package com.Entidades;
 
 /**
  * Universidad Catolica Andres Bello
