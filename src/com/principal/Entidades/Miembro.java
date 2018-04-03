@@ -1,70 +1,34 @@
 package com.principal.Entidades;
 
-import java.util.ArrayList;
-
 /**
- * Universidad Catolica Andres Bello
- * Facultad de Ingenieria
- * Escuela de Ingenieria Informatica
- * Trabajo Especial de Grado
- * ----------------------------------
- * Tutor:
- * --------------
- * Wilmer Pereira
- *
- * Autores:
- * --------------
- * Garry Bruno
- * Carlos Valero
+ * Created by Junior on 01/04/2018.
  */
-public class Miembro extends Nodo {
-     private int puertoArchivo;
-     private ArrayList<Recurso> cola;
-     private ArrayList<Recurso> recursos;
-     private ArrayList<Finger> tabla;
-     private static Miembro instancia;
+public abstract class Nodo {
+    private int puertopeticion;
+    private String direccion;
+    private String hash;
 
-    private Miembro(){
-
+    public int getPuertopeticion() {
+        return puertopeticion;
     }
 
-    public static Miembro obtenerInstancia(){
-        if (instancia == null)
-            instancia = new Miembro();
-        return instancia;
+    public void setPuertopeticion(int puertopeticion) {
+        this.puertopeticion = puertopeticion;
     }
 
-    public int getPuertoArchivo() {
-        return puertoArchivo;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setPuertoArchivo(int puertoArchivo) {
-        this.puertoArchivo = puertoArchivo;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public ArrayList<Recurso> getCola() {
-        return cola;
+    public String getHash() {
+        return hash;
     }
 
-    public void setCola(ArrayList<Recurso> cola) {
-        this.cola = cola;
+    public void setHash(String hash) {
+        this.hash = hash;
     }
-
-    public ArrayList<Recurso> getRecursos() {
-        return recursos;
-    }
-
-    public void setRecursos(ArrayList<Recurso> recursos) {
-        this.recursos = recursos;
-    }
-
-    public ArrayList<Finger> getTabla() {
-        return tabla;
-    }
-
-    public void setTabla(ArrayList<Finger> tabla) {
-        this.tabla = tabla;
-    }
-
-
 }
