@@ -1,6 +1,6 @@
 package com.principal;
 
-import com.principal.Comandos.EjecutarComando;
+import com.Comandos.EjecutarComando;
 
 import java.util.Scanner;
 /**
@@ -28,6 +28,8 @@ public class Main {
         System.out.println("Tutor: Wilmer Pereira");
         System.out.println("-----------------------------------------------------------");
         System.out.println("Algoritmo de Direccionamiento por Hash para redes P2P");
+        System.out.println("-----------------------------------------------------------");
+        System.out.println("En caso de no conocer los comandos, escriba el comando help");
         System.out.println("-----------------------------------------------------------");
         System.out.println("Ingrese un comando:");
         Scanner in = new Scanner(System.in);
