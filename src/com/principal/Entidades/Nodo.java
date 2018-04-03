@@ -17,20 +17,20 @@ import java.util.ArrayList;
  * Garry Bruno
  * Carlos Valero
  */
-public class Miembro extends Nodo {
+public class Nodo extends Miembro {
      private int puertoArchivo;
      private ArrayList<Recurso> cola;
      private ArrayList<Recurso> recursos;
      private ArrayList<Finger> tabla;
-     private static Miembro instancia;
+     private static Nodo instancia;
 
-    private Miembro(){
+    private Nodo(){
 
     }
 
-    public static Miembro obtenerInstancia(){
+    public static Nodo obtenerInstancia(){
         if (instancia == null)
-            instancia = new Miembro();
+            instancia = new Nodo();
         return instancia;
     }
 

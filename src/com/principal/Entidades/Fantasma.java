@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Junior on 01/04/2018.
  */
-public class Fantasma extends Nodo {
+public class Fantasma extends Miembro {
 
     private ArrayList<String> anillo;
 

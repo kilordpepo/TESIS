@@ -1,9 +1,8 @@
 package com.principal.Comandos;
 
 import com.principal.Entidades.Fantasma;
-import com.principal.Entidades.Miembro;
+import com.principal.Entidades.Nodo;
 import com.principal.Utils.SistemaUtil;
-import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.io.OutputStream;
 
@@ -37,7 +36,7 @@ public class AsignarRedCommand extends BaseCommand {
             if (!SistemaUtil.tipo.equals("")) {
                 if (args.length==3){
                     if (args[2].equals("miembro")) {
-                    Miembro miembro = Miembro.obtenerInstancia();
+                    Nodo miembro = Nodo.obtenerInstancia();
                     miembro.setDireccion(args[0]);
                     miembro.setPuertopeticion(Integer.parseInt(args[1]));
                     miembro.setPuertoArchivo(Integer.parseInt(args[1]) + 1);
@@ -67,7 +66,7 @@ public class AsignarRedCommand extends BaseCommand {
                             System.out.println("-------------------------------------------------------");
                             System.out.println("Sus datos de conexion son: ");
                             System.out.println("-------------------------------------------------------");
-                            Miembro miembro = Miembro.obtenerInstancia();
+                            Nodo miembro = Nodo.obtenerInstancia();
                             System.out.println("IP: " + miembro.getDireccion());
                             System.out.println("Hash IP: " + miembro.getHash());
                             System.out.println("Puerto de Escucha: " + miembro.getPuertopeticion());

@@ -3,7 +3,7 @@ package com.principal.Entidades;
 /**
  * Created by Junior on 01/04/2018.
  */
-public abstract class Nodo {
+public abstract class Miembro {
     private int puertopeticion;
     private String direccion;
     private String hash;

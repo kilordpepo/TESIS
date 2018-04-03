@@ -1,6 +1,6 @@
 package com.principal.Comandos;
 
-import com.principal.Entidades.Miembro;
+import com.principal.Entidades.Nodo;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -8,7 +8,6 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 
 /**
  * Universidad Catolica Andres Bello
@@ -38,7 +37,7 @@ public class RecibirMensajeCommand extends AsyncCommand{
     @Override
     public void executeOnBackground(String[] args, OutputStream out) {
             try {
-                Miembro nodo = Miembro.obtenerInstancia();
+                Nodo nodo = Nodo.obtenerInstancia();
                 ServerSocket recepcion = new ServerSocket(nodo.getPuertopeticion());
                 while (true) {
                     System.out.printf("Conexion habilitada y en espera...");
