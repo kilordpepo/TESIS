@@ -20,6 +20,12 @@ import java.util.List;
  */
 public class CommandUtil {
 
+    /**
+     * Permite organizar los parametros que conforman la linea de comando, de tal manera que no se cuente
+     * la primera palabra (o comando) que se coloque en ella.
+     * @param args
+     * @return
+     */
     public static String[] tokenizerArgs(String args) {
         List<String> tokens = new ArrayList<String>();
         char[] charArray = args.toCharArray();

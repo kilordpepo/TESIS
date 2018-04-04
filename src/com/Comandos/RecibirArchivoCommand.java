@@ -24,11 +24,9 @@ public class RecibirArchivoCommand extends AsyncCommand {
 
     @Override
     public void executeOnBackground(String[] args, OutputStream out) {
-        //Solicitudes concurrentes:
-         solicitarArchivo(args[0],Integer.parseInt(args[1]),args[2]);
-    }
-
-    private void solicitarArchivo(String ip, int puerto, String nombre){
+        String ip =args[0];
+        int puerto = Integer.parseInt(args[1]);
+        String nombre = args[2];
         DataOutputStream output;
         BufferedInputStream bis;
         BufferedOutputStream bos;
@@ -108,4 +106,6 @@ public class RecibirArchivoCommand extends AsyncCommand {
         }
 
     }
+
+
 }

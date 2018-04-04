@@ -24,6 +24,10 @@ public class CommandManager {
     private static final HashMap<String, Class<? extends ICommand>> COMMANDS =
             new HashMap<String, Class<? extends ICommand>>();
 
+    /**
+     * Este constructor permite el registro de cada uno de los comandos que presenta el
+     * programa.
+     */
     private CommandManager() {
         registCommand(ActualizarFingerCommand.COMMAND_NAME, ActualizarFingerCommand.class);
         registCommand(BuscarRecursoCommand.COMMAND_NAME, BuscarRecursoCommand.class);
@@ -40,6 +44,10 @@ public class CommandManager {
 
     }
 
+    /**
+     * Permite la generacion de un Singleton de la clase CommandManager
+     * @return
+     */
     public static synchronized CommandManager getIntance() {
         if (commandManager == null) {
             commandManager = new CommandManager();
@@ -47,6 +55,12 @@ public class CommandManager {
         return commandManager;
     }
 
+    /**
+     * Permite obtener una clase que implemente la interfaz ICOMMAND y que sea herencia
+     * de BaseCommand
+     * @param commandName
+     * @return
+     */
     public ICommand getCommand(String commandName) {
         if (COMMANDS.containsKey(commandName.toUpperCase())) {
             try {
@@ -60,6 +74,11 @@ public class CommandManager {
         }
     }
 
+    /**
+     * Permite el registro de un comando en el mapa de hash.
+     * @param commandName
+     * @param command
+     */
     public void registCommand(String commandName,
                               Class<? extends ICommand> command) {
         COMMANDS.put(commandName.toUpperCase(), command);
