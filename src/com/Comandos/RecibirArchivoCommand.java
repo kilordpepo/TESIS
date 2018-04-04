@@ -24,19 +24,19 @@ public class RecibirArchivoCommand extends AsyncCommand {
 
     @Override
     public void executeOnBackground(String[] args, OutputStream out) {
-        String ip =args[0];
-        int puerto = Integer.parseInt(args[1]);
-        String nombre = args[2];
-        DataOutputStream output;
-        BufferedInputStream bis;
-        BufferedOutputStream bos;
-        byte[] receivedData;
-        int in;
-        String file;
-        String[] d = null;
-        Recurso re = new Recurso();
-        DataInputStream dis = null;
         try {
+            DataOutputStream output;
+            BufferedInputStream bis;
+            BufferedOutputStream bos;
+            byte[] receivedData;
+            int in;
+            String file;
+            String[] d = null;
+            DataInputStream dis = null;
+            Recurso re = new Recurso();
+            String ip =args[0];
+            int puerto = Integer.parseInt(args[1]);
+            String nombre = args[2];
             System.out.println("Iniciando proceso de descarga de archivo");
             // Se abre una conexion con Servidor Socket
             Socket cliente = new Socket(ip, puerto);
@@ -82,8 +82,6 @@ public class RecibirArchivoCommand extends AsyncCommand {
             int l = 0;
             boolean partido = true;
             //Se manejan los datos acerca del libro recibido
-
-            System.out.println("Tamano total: " + re.getTamano());
             while ((in = bis.read(receivedData)) != -1) {
                 // System.out.println("entro");
                 bos.write(receivedData, 0, in);
