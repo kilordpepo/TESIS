@@ -1,6 +1,10 @@
 package com.Comandos;
 
+import com.Entidades.Fantasma;
+
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Universidad Catolica Andres Bello
@@ -28,6 +32,20 @@ public class OrganizarAnilloCommand extends BaseCommand{
 
     @Override
     public void ejecutar(String[] args, OutputStream out) {
-
+        ArrayList<String> original = new ArrayList<String>();
+        ArrayList<String> resultado = new ArrayList<String>();
+        Fantasma fantasma = Fantasma.obtenerInstancia();
+        for (String elemento : fantasma.getAnillo())
+        {
+            original.add(elemento.split(":")[1]);
+        }
+        Collections.sort(original);
+        for(String elemento : original){
+            for(String organizando : fantasma.getAnillo()){
+                if (elemento.equals(organizando.split(":")[1]))
+                    resultado.add(organizando);
+            }
+        }
+        fantasma.setAnillo(resultado);
     }
 }

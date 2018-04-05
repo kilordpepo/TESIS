@@ -20,7 +20,7 @@ public class Fantasma extends Miembro {
     public static Fantasma instancia;
 
     private Fantasma (){
-
+      anillo = new ArrayList<String>();
     }
 
     public static Fantasma obtenerInstancia(){
