@@ -21,6 +21,8 @@ public class HelpCommand extends BaseCommand {
         System.out.println("sendfile - Permite el envio de un archivo ");
         System.out.println("send - Permite el envio de un mensaje ");
         System.out.println("order - Ordena el anillo");
+        System.out.println("addnode - Agregar nodo al anillo");
+        System.out.println("deletenode - Eliminar nodo del anillo");
         System.out.println("listen - Habilita un puerto de escucha para solicitudes");
         System.out.println("listenfile - Habilita un puerto de escucha para descargas");
         System.out.println("type - Define el tipo de nodo");

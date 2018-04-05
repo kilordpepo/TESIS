@@ -33,6 +33,8 @@ public class CommandManager {
         registCommand(BuscarRecursoCommand.COMMAND_NAME, BuscarRecursoCommand.class);
         registCommand(DescargarRecursoCommand.COMMAND_NAME, DescargarRecursoCommand.class);
         registCommand(OrganizarAnilloCommand.COMMAND_NAME, OrganizarAnilloCommand.class);
+        registCommand(AgregarNodo.COMMAND_NAME,AgregarNodo.class);
+        registCommand(EliminarNodo.COMMAND_NAME,EliminarNodo.class);
         registCommand(RecibirMensajeCommand.COMMAND_NAME, RecibirMensajeCommand.class);
         registCommand(ExitCommand.COMMAND_NAME, ExitCommand.class);
         registCommand(AsignarRedCommand.COMMAND_NAME, AsignarRedCommand.class);
