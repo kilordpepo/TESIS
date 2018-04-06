@@ -23,7 +23,7 @@ public class Recurso {
     private String ruta;
     private String propietario;
     private int descargas;
-    private int tamano;
+    private long tamano;
     private BigInteger hash;
     private String estado;
 
@@ -67,11 +67,11 @@ public class Recurso {
         this.descargas = descargas;
     }
 
-    public int getTamano() {
+    public long getTamano() {
         return tamano;
     }
 
-    public void setTamano(int tamano) {
+    public void setTamano(long tamano) {
         this.tamano = tamano;
     }
 

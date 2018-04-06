@@ -43,7 +43,7 @@ public class CommandManager {
         registCommand(HelpCommand.COMMAND_NAME,HelpCommand.class);
         registCommand(EnviarArchivoCommand.COMMAND_NAME,EnviarArchivoCommand.class);
         registCommand(RecibirArchivoCommand.COMMNAND_NAME,RecibirArchivoCommand.class);
-
+        registCommand(CargarRecursosCommand.COMMAND_NAME,CargarRecursosCommand.class);
     }
 
     /**

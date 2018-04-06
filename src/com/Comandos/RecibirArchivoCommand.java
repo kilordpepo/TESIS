@@ -63,7 +63,7 @@ public class RecibirArchivoCommand extends AsyncCommand {
                 System.out.println("Su descarga habia sido interrumpida.. descargando nuevamente desde el 50% ");
                 recarga=true;
                 BufferedInputStream arreglar = new BufferedInputStream(new FileInputStream(descargado));
-                byte [] arreglo = new byte[re.getTamano()/2];
+                byte [] arreglo = new byte[((int) re.getTamano())/2];
                 in=arreglar.read(arreglo);
                 recarga = false;
                 arreglar.close();
