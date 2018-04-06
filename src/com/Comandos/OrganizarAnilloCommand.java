@@ -32,17 +32,17 @@ public class OrganizarAnilloCommand extends BaseCommand{
 
     @Override
     public void ejecutar(String[] args, OutputStream out) {
-        ArrayList<String> original = new ArrayList<String>();
+        ArrayList<Integer> original = new ArrayList<Integer>();
         ArrayList<String> resultado = new ArrayList<String>();
         Fantasma fantasma = Fantasma.obtenerInstancia();
         for (String elemento : fantasma.getAnillo())
         {
-            original.add(elemento.split(":")[1]);
+            original.add(Integer.parseInt(elemento.split(":")[1]));
         }
         Collections.sort(original);
-        for(String elemento : original){
+        for(int elemento : original){
             for(String organizando : fantasma.getAnillo()){
-                if (elemento.equals(organizando.split(":")[1]))
+                if (elemento == Integer.parseInt(organizando.split(":")[1]))
                     resultado.add(organizando);
             }
         }
