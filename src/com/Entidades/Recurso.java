@@ -1,5 +1,7 @@
 package com.Entidades;
 
+import java.math.BigInteger;
+
 /**
  * Universidad Catolica Andres Bello
  * Facultad de Ingenieria
@@ -22,7 +24,7 @@ public class Recurso {
     private String propietario;
     private int descargas;
     private int tamano;
-    private String hash;
+    private BigInteger hash;
     private String estado;
 
     public int getId() {
@@ -73,19 +75,19 @@ public class Recurso {
         this.tamano = tamano;
     }
 
-    public String getHash() {
-        return hash;
-    }
-
-    public void setHash(String hash) {
-        this.hash = hash;
-    }
-
     public String getEstado() {
         return estado;
     }
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public BigInteger getHash() {
+        return hash;
+    }
+
+    public void setHash(BigInteger hash) {
+        this.hash = hash;
     }
 }

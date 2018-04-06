@@ -1,12 +1,14 @@
 package com.Entidades;
 
+import java.math.BigInteger;
+
 /**
  * Created by Junior on 01/04/2018.
  */
 public abstract class Miembro {
     private int puertopeticion;
     private String direccion;
-    private String hash;
+    private BigInteger hash;
 
     public int getPuertopeticion() {
         return puertopeticion;
@@ -24,11 +26,12 @@ public abstract class Miembro {
         this.direccion = direccion;
     }
 
-    public String getHash() {
+    public BigInteger getHash() {
         return hash;
     }
 
-    public void setHash(String hash) {
+    public void setHash(BigInteger hash) {
         this.hash = hash;
     }
 }
+
