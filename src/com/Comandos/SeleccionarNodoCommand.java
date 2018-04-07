@@ -1,6 +1,8 @@
 package com.Comandos;
 
-import com.Entidades.Fantasma;
+import com.Entidades.Finger;
+import com.Entidades.Miembro;
+import com.Entidades.Nodo;
 
 import java.io.OutputStream;
 
@@ -19,9 +21,9 @@ import java.io.OutputStream;
  * Garry Bruno
  * Carlos Valero
  */
-public class AgregarNodo extends BaseCommand {
+public class SeleccionarNodoCommand extends BaseCommand{
 
-    public static final String COMMAND_NAME="addnode";
+    public static final String COMMAND_NAME="selectnode";
 
     @Override
     public String obtenerNombreComando() {
@@ -30,7 +32,12 @@ public class AgregarNodo extends BaseCommand {
 
     @Override
     public void ejecutar(String[] args, OutputStream out) {
-        Fantasma fantasma = Fantasma.obtenerInstancia();
-        fantasma.getAnillo().add(args[0]+":"+args[1]);
+
+        Long valor = Long.parseLong(args[0]);
+        Nodo nodo = Nodo.obtenerInstancia();
+        for (Finger item : nodo.getTabla()){
+            
+        }
+
     }
 }

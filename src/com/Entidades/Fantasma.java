@@ -3,7 +3,19 @@ package com.Entidades;
 import java.util.ArrayList;
 
 /**
- * Created by Junior on 01/04/2018.
+ * Universidad Catolica Andres Bello
+ * Facultad de Ingenieria
+ * Escuela de Ingenieria Informatica
+ * Trabajo Especial de Grado
+ * ----------------------------------
+ * Tutor:
+ * --------------
+ * Wilmer Pereira
+ *
+ * Autores:
+ * --------------
+ * Garry Bruno
+ * Carlos Valero
  */
 public class Fantasma extends Miembro {
 
@@ -29,5 +41,21 @@ public class Fantasma extends Miembro {
         return instancia;
     }
 
+    /**
+     * Metodo encargado de devolver la direccion IP y el puerto de escucha de un determinado
+     * nodo dando el hash de la direccion IP del mismo.
+     * @param iphash
+     * @return
+     */
+    public String obtenerIP(Long iphash){
+        String respuesta ="";
+        for(String nodo :this.anillo){
+            String atributos [] = nodo.split(":");
+            if (iphash.equals(atributos[0])){
+              respuesta = atributos[1]+":"+atributos[2];
+            }
+        }
+        return respuesta;
+    }
 
 }

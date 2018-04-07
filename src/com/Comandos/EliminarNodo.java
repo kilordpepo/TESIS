@@ -5,7 +5,19 @@ import com.Entidades.Fantasma;
 import java.io.OutputStream;
 
 /**
- * Created by Junior on 05/04/2018.
+ * Universidad Catolica Andres Bello
+ * Facultad de Ingenieria
+ * Escuela de Ingenieria Informatica
+ * Trabajo Especial de Grado
+ * ----------------------------------
+ * Tutor:
+ * --------------
+ * Wilmer Pereira
+ *
+ * Autores:
+ * --------------
+ * Garry Bruno
+ * Carlos Valero
  */
 public class EliminarNodo extends BaseCommand {
 

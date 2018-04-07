@@ -1,11 +1,23 @@
 package com.Entidades;
 
 /**
- * Created by Junior on 01/04/2018.
+ * Universidad Catolica Andres Bello
+ * Facultad de Ingenieria
+ * Escuela de Ingenieria Informatica
+ * Trabajo Especial de Grado
+ * ----------------------------------
+ * Tutor:
+ * --------------
+ * Wilmer Pereira
+ *
+ * Autores:
+ * --------------
+ * Garry Bruno
+ * Carlos Valero
  */
 public class Finger {
     private int indice;
-    private int valor;
+    private String valor;
 
     public int getIndice() {
         return indice;
@@ -15,11 +27,11 @@ public class Finger {
         this.indice = indice;
     }
 
-    public int getValor() {
+    public String getValor() {
         return valor;
     }
 
-    public void setValor(int valor) {
+    public void setValor(String valor) {
         this.valor = valor;
     }
 }

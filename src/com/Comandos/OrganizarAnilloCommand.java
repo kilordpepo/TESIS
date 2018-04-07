@@ -27,7 +27,7 @@ public class OrganizarAnilloCommand extends BaseCommand{
 
     @Override
     public String obtenerNombreComando() {
-        return null;
+        return COMMAND_NAME;
     }
 
     @Override

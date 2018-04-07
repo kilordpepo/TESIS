@@ -66,5 +66,27 @@ public class Nodo extends Miembro {
         this.tabla = tabla;
     }
 
+    /**
+     * Metodo que se encarga de devolver los datos de un nodo determinado dato el identificador
+     * en hash de un archivo. Este revisa en la tabla finger quien es el nodo que es probable
+     * que tenga el archivo.
+     * @param archivohash aplicando funcion hash
+     * @return none (si no encontro alguno) o la IP (si lo encuentra)
+     */
+    public String seleccionarNodo(Long archivohash){
+        String respuesta = "";
+        Nodo nodo = Nodo.obtenerInstancia();
+        for (Finger item : nodo.getTabla()){
+            String atributos[] = item.getValor().split(":");
+            if(archivohash<Math.abs(Long.parseLong(atributos[0]))){
+                respuesta = atributos[0];
+            }
+        }
+        if (respuesta=="")
+         return "none";
+
+        return respuesta;
+    }
+
 
 }
