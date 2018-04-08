@@ -19,20 +19,20 @@ import java.util.ArrayList;
  */
 public class Fantasma extends Miembro {
 
-    private ArrayList<String> anillo;
+    private ArrayList<NodoRF> anillo;
 
-    public ArrayList<String> getAnillo() {
+    public ArrayList<NodoRF> getAnillo() {
         return anillo;
     }
 
-    public void setAnillo(ArrayList<String> anillo) {
+    public void setAnillo(ArrayList<NodoRF> anillo) {
         this.anillo = anillo;
     }
 
     public static Fantasma instancia;
 
     private Fantasma (){
-      anillo = new ArrayList<String>();
+      anillo = new ArrayList<NodoRF>();
     }
 
     public static Fantasma obtenerInstancia(){
@@ -49,10 +49,9 @@ public class Fantasma extends Miembro {
      */
     public String obtenerIP(Long iphash){
         String respuesta ="";
-        for(String nodo :this.anillo){
-            String atributos [] = nodo.split(":");
-            if (iphash.equals(atributos[0])){
-              respuesta = atributos[1]+":"+atributos[2];
+        for(NodoRF nodo :this.anillo){
+            if (iphash.equals(nodo.getHash())){
+              respuesta = nodo.getDireccion()+":"+nodo.getPuertopeticion();
             }
         }
         return respuesta;

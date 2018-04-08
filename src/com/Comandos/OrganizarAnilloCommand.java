@@ -1,6 +1,8 @@
 package com.Comandos;
 
 import com.Entidades.Fantasma;
+import com.Entidades.Nodo;
+import com.Entidades.NodoRF;
 
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -33,16 +35,16 @@ public class OrganizarAnilloCommand extends BaseCommand{
     @Override
     public void ejecutar(String[] args, OutputStream out) {
         ArrayList<Integer> original = new ArrayList<Integer>();
-        ArrayList<String> resultado = new ArrayList<String>();
+        ArrayList<NodoRF> resultado = new ArrayList<NodoRF>();
         Fantasma fantasma = Fantasma.obtenerInstancia();
-        for (String elemento : fantasma.getAnillo())
+        for (NodoRF elemento : fantasma.getAnillo())
         {
-            original.add(Integer.parseInt(elemento.split(":")[1]));
+            original.add(elemento.hashCode());
         }
         Collections.sort(original);
         for(int elemento : original){
-            for(String organizando : fantasma.getAnillo()){
-                if (elemento == Integer.parseInt(organizando.split(":")[1]))
+            for(NodoRF organizando : fantasma.getAnillo()){
+                if (elemento == organizando.hashCode())
                     resultado.add(organizando);
             }
         }

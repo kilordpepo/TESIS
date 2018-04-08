@@ -66,6 +66,15 @@ public class Nodo extends Miembro {
         this.tabla = tabla;
     }
 
+
+    public static Nodo getInstancia() {
+        return instancia;
+    }
+
+    public static void setInstancia(Nodo instancia) {
+        Nodo.instancia = instancia;
+    }
+
     /**
      * Metodo que se encarga de devolver los datos de un nodo determinado dato el identificador
      * en hash de un archivo. Este revisa en la tabla finger quien es el nodo que es probable

@@ -3,12 +3,34 @@ package com.Entidades;
 import java.math.BigInteger;
 
 /**
- * Created by Junior on 01/04/2018.
+ * Universidad Catolica Andres Bello
+ * Facultad de Ingenieria
+ * Escuela de Ingenieria Informatica
+ * Trabajo Especial de Grado
+ * ----------------------------------
+ * Tutor:
+ * --------------
+ * Wilmer Pereira
+ *
+ * Autores:
+ * --------------
+ * Garry Bruno
+ * Carlos Valero
  */
 public abstract class Miembro {
     private int puertopeticion;
     private String direccion;
     private BigInteger hash;
+
+    public Miembro(){
+
+    }
+
+    public Miembro(String direccion,int puertopeticion,BigInteger hash){
+        this.direccion = direccion;
+        this.puertopeticion = puertopeticion;
+        this.hash = hash;
+    }
 
     public int getPuertopeticion() {
         return puertopeticion;
