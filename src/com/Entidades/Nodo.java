@@ -1,6 +1,9 @@
 package com.Entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Universidad Catolica Andres Bello
@@ -17,11 +20,11 @@ import java.util.ArrayList;
  * Garry Bruno
  * Carlos Valero
  */
-public class Nodo extends Miembro {
+public class Nodo extends Miembro implements Serializable {
      private int puertoArchivo;
      private ArrayList<Recurso> cola;
      private ArrayList<Recurso> recursos;
-     private ArrayList<Finger> tabla;
+     private HashMap<Integer,String> tablafinger;
      private static Nodo instancia;
 
     private Nodo(){
@@ -58,12 +61,12 @@ public class Nodo extends Miembro {
         this.recursos = recursos;
     }
 
-    public ArrayList<Finger> getTabla() {
-        return tabla;
+    public HashMap<Integer,String> getTabla() {
+        return tablafinger;
     }
 
-    public void setTabla(ArrayList<Finger> tabla) {
-        this.tabla = tabla;
+    public void setTabla(HashMap<Integer,String> tabla) {
+        this.tablafinger = tabla;
     }
 
 
@@ -85,8 +88,10 @@ public class Nodo extends Miembro {
     public String seleccionarNodo(Long archivohash){
         String respuesta = "";
         Nodo nodo = Nodo.obtenerInstancia();
-        for (Finger item : nodo.getTabla()){
-            String atributos[] = item.getValor().split(":");
+        HashMap<Integer,String> tabla = nodo.getTabla();
+
+        for (String item : tabla.values()){
+            String atributos[] = item.split(":");
             if(archivohash<Math.abs(Long.parseLong(atributos[0]))){
                 respuesta = atributos[0];
             }

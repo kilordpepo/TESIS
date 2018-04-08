@@ -33,7 +33,7 @@ public class AsignarRedCommand extends BaseCommand {
     @Override
     public void ejecutar(String[] args, OutputStream out) {
         if (args.length>1){
-            if (!SistemaUtil.tipo.equals("")) {
+           // if (!SistemaUtil.tipo.equals("")) {
                 if (args.length==3){
                     if (args[2].equals("miembro")) {
                     Nodo miembro = Nodo.obtenerInstancia();
@@ -53,9 +53,9 @@ public class AsignarRedCommand extends BaseCommand {
                     System.out.println("Faltan argumentos en la sentencia!");
                 }
 
-            }else{
-                System.out.println("Debe especificar el tipo de nodo primero! ");
-            }
+           // }else{
+               // System.out.println("Debe especificar el tipo de nodo primero! ");
+           // }
 
         }else if(args.length == 1)
             {

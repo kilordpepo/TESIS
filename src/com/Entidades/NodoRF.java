@@ -2,6 +2,7 @@ package com.Entidades;
 
 import com.Utils.RespuestaUtils;
 
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 
 /**
@@ -19,7 +20,7 @@ import java.security.NoSuchAlgorithmException;
  * Garry Bruno
  * Carlos Valero
  */
-public class NodoRF extends Miembro {
+public class NodoRF extends Miembro implements Serializable {
 
 
     public NodoRF(String ip, int puerto) throws NoSuchAlgorithmException {

@@ -1,5 +1,6 @@
 package com.Entidades;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 /**
@@ -17,7 +18,7 @@ import java.math.BigInteger;
  * Garry Bruno
  * Carlos Valero
  */
-public class Recurso {
+public class Recurso  implements Serializable {
     private int id;
     private String nombre;
     private String ruta;

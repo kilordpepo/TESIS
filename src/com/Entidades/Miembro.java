@@ -1,5 +1,6 @@
 package com.Entidades;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 /**
@@ -17,7 +18,7 @@ import java.math.BigInteger;
  * Garry Bruno
  * Carlos Valero
  */
-public abstract class Miembro {
+public abstract class Miembro implements Serializable {
     private int puertopeticion;
     private String direccion;
     private BigInteger hash;

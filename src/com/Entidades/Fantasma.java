@@ -1,5 +1,6 @@
 package com.Entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  * Garry Bruno
  * Carlos Valero
  */
-public class Fantasma extends Miembro {
+public class Fantasma extends Miembro  implements Serializable {
 
     private ArrayList<NodoRF> anillo;
 

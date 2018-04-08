@@ -1,5 +1,7 @@
 package com.Comandos;
 
+import com.ControladoresRed.ConexionUtils;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -47,26 +49,7 @@ public class EnviarMensajeCommand extends BaseCommand {
      * @param puerto
      * @return
      */
-    public static Object enviarDato(Object dato,String ip, int puerto){
-        try {
-            ObjectOutputStream salidaObjeto;
-            //Se colocan los datos del servidor central (Direccion IP y Puerto).
-            Socket reves = null;
-            reves = new Socket (ip,puerto);
-            salidaObjeto = new ObjectOutputStream(reves.getOutputStream());
-            //El cliente manda:
-            salidaObjeto.writeObject(dato);
-            //El cliente recibe:
-            ObjectInputStream ois = new ObjectInputStream(reves.getInputStream());
-            Object respuesta = ois.readObject();
-            //Se cierra la conexion.
-            reves.close();
-            return respuesta;
-        } catch (IOException ex) {
-            //Logger.getLogger(ServidorCentral.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            //Logger.getLogger(ServidorCentral.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+    public static void enviarDato(Object dato,String ip, int puerto){
+         ConexionUtils.obtenerInstancia().enviarMensaje(dato);
     }
 }
