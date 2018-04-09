@@ -37,12 +37,9 @@ public class GenerarFingerCommand extends BaseCommand {
                         break;
                     }
                 }
+            }
                 if (tabla.isEmpty()) {
-                    for (int j = 1; j <= 5; j++) {
-                        tabla.put(j, primero);
-                    }
-
-                }
+                        tabla.put(1, primero);
             }
                 ConexionUtils.obtenerInstancia().iniciarConexion(nodo.getDireccion(),nodo.getPuertopeticion());
                 EnviarMensajeCommand.enviarDato("addtable",nodo.getDireccion(),nodo.getPuertopeticion());
