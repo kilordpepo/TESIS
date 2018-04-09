@@ -35,7 +35,7 @@ public class AgregarNodo extends BaseCommand {
     public void ejecutar(String[] args, OutputStream out) {
         Fantasma fantasma = Fantasma.obtenerInstancia();
         try {
-            fantasma.getAnillo().add(new NodoRF(args[0],Integer.parseInt(args[0])));
+            fantasma.getAnillo().add(new NodoRF(args[0],Integer.parseInt(args[1])));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

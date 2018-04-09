@@ -41,6 +41,7 @@ public class EliminarNodo extends BaseCommand {
           index++;
       }
         fantasma.getAnillo().remove(index);
+
     }
 
 

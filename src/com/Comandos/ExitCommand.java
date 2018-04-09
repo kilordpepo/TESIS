@@ -1,6 +1,13 @@
 package com.Comandos;
 
+import com.ControladoresRed.ConexionUtils;
+import com.Entidades.Fantasma;
+import com.Entidades.Nodo;
+import com.Entidades.NodoRF;
+
 import java.io.OutputStream;
+import java.security.NoSuchAlgorithmException;
+
 /**
  * Universidad Catolica Andres Bello
  * Facultad de Ingenieria
@@ -18,7 +25,7 @@ import java.io.OutputStream;
  */
 public class ExitCommand extends BaseCommand {
 
-    public static final String COMMAND_NAME = "exit";
+    public static final String COMMAND_NAME = "finish";
 
     @Override
     public String obtenerNombreComando() {
@@ -27,6 +34,15 @@ public class ExitCommand extends BaseCommand {
 
     @Override
     public void ejecutar(String[] args, OutputStream out) {
-        System.exit(0);
+            ConexionUtils.obtenerInstancia()
+                    .iniciarConexion(Fantasma.obtenerInstancia().getDireccion(),
+                            Fantasma.obtenerInstancia().getPuertopeticion());
+            EnviarMensajeCommand.enviarDato("deletenode",
+                    Fantasma.obtenerInstancia().getDireccion(),
+                    Fantasma.obtenerInstancia().getPuertopeticion());
+            EnviarMensajeCommand.enviarDato(Nodo.getInstancia().getDireccion(),
+                    Fantasma.obtenerInstancia().getDireccion(),
+                    Fantasma.obtenerInstancia().getPuertopeticion());
+            System.exit(0);
     }
 }

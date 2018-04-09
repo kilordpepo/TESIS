@@ -8,10 +8,24 @@ import java.io.File;
 import java.io.OutputStream;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-
+/**
+ * Universidad Catolica Andres Bello
+ * Facultad de Ingenieria
+ * Escuela de Ingenieria Informatica
+ * Trabajo Especial de Grado
+ * ----------------------------------
+ * Tutor:
+ * --------------
+ * Wilmer Pereira
+ *
+ * Autores:
+ * --------------
+ * Garry Bruno
+ * Carlos Valero
+ */
 public class CargarRecursosCommand extends BaseCommand {
 
-    public static final String COMMAND_NAME = "cargarRecursos";
+    public static final String COMMAND_NAME = "loadresources";
 
     @Override
     public String obtenerNombreComando() {
@@ -22,7 +36,7 @@ public class CargarRecursosCommand extends BaseCommand {
     public void ejecutar(String[] args, OutputStream out) {
         try {
             File carpeta = new File("recursos");
-            System.out.println("Recursos ofrecidos:");
+            System.out.println("Cargando recursos...");
             Nodo nodo = Nodo.obtenerInstancia();
             ArrayList<Recurso> recursos = new ArrayList<>();
             Recurso recurso;

@@ -91,9 +91,8 @@ public class Nodo extends Miembro implements Serializable {
         HashMap<Integer,String> tabla = nodo.getTabla();
 
         for (String item : tabla.values()){
-            String atributos[] = item.split(":");
-            if(archivohash<Math.abs(Long.parseLong(atributos[0]))){
-                respuesta = atributos[0];
+            if(archivohash<Math.abs(Long.parseLong(item))){
+                respuesta = item;
             }
         }
         if (respuesta=="")

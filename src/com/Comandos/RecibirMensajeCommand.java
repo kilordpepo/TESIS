@@ -1,5 +1,7 @@
 package com.Comandos;
 
+import com.ControladoresRed.ConexionUtils;
+import com.ControladoresRed.RedProcesos;
 import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
 import com.Entidades.NodoRF;
@@ -51,7 +53,7 @@ public class RecibirMensajeCommand extends AsyncCommand{
                     recepcion = new ServerSocket(nodo.getPuertopeticion());
                 }
                 while (true) {
-                    System.out.printf("ConexionUtils habilitada y en espera...");
+                    System.out.println("ConexionUtils habilitada y en espera...");
                     Socket recibo = recepcion.accept();
                     ObjectInputStream ois = new ObjectInputStream(recibo.getInputStream());
                     ObjectOutputStream salidaObjeto = new ObjectOutputStream(recibo.getOutputStream());
@@ -59,9 +61,8 @@ public class RecibirMensajeCommand extends AsyncCommand{
                     Object mensaje = ois.readObject();
                     //Falta ejecutar acciones dependiendo del mensaje
                     String tipo = (String) mensaje;
-                    realizarAccion(tipo,ois);
-
-
+                    //Se ejecuta un hilo con el proceso
+                    new RedProcesos(tipo,ois).run();
 
                 }
 
@@ -73,33 +74,6 @@ public class RecibirMensajeCommand extends AsyncCommand{
             Object respuesta = null;
     }
 
-    /**
-     * Metodo encargado de ejecutar una accion en base a un comando recibido por socket
-     * @param tipo
-     * @param ois
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
-    public void realizarAccion(String tipo,ObjectInputStream ois ) throws IOException, ClassNotFoundException {
-        switch(tipo){
-            case"addnode":{
-                Object object =  ois.readObject();
-                if (object instanceof  NodoRF) {
-                    NodoRF nodo = (NodoRF) object;
-                    Fantasma.obtenerInstancia().getAnillo().add(nodo);
-                    System.out.println("Se ha agregado un nodo de forma exitosa");
-                    EjecutarComando.linea("order");
-                    EjecutarComando.linea("generarFinger");
-                }
-                break;
-            }
-            case"addtable":{
-                Nodo.getInstancia().setTabla((HashMap<Integer, String>) ois.readObject());
-                System.out.println("Se ha agregado la tabla de forma exitosa");
-                break;
-            }
-        }
 
-    }
 
 }

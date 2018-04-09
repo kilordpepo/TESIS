@@ -23,6 +23,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        EjecutarComando.linea("loadresources");
         System.out.println("-----------------------------------------------------------");
         System.out.println("UCAB - Trabajo Especial de Grado");
         System.out.println("Autores: Garry Bruno / Carlos Valero");
