@@ -5,6 +5,7 @@ import com.Entidades.Nodo;
 import com.Entidades.NodoRF;
 
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -39,12 +40,12 @@ public class OrganizarAnilloCommand extends BaseCommand{
         Fantasma fantasma = Fantasma.obtenerInstancia();
         for (NodoRF elemento : fantasma.getAnillo())
         {
-            original.add(elemento.hashCode());
+            original.add(elemento.getHash().intValue());
         }
         Collections.sort(original);
         for(int elemento : original){
             for(NodoRF organizando : fantasma.getAnillo()){
-                if (elemento == organizando.hashCode())
+                if (elemento == organizando.getHash().intValue())
                     resultado.add(organizando);
             }
         }
