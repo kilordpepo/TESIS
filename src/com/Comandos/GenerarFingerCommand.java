@@ -34,7 +34,7 @@ public class GenerarFingerCommand extends BaseCommand {
 
                     if (aux.getHash().intValue() >= valorFinger) {
                         tabla.put(indice, aux.getDireccion());
-                        indice++;
+                        indice += 1;
                         break;
                     }
                 }
