@@ -99,8 +99,7 @@ public class RedProcesos extends Thread {
                 if (object instanceof String){
                     String datos = (String)object;
                     String atributos [] = datos.split(":");
-
-
+                    System.out.println("El archivo lo tiene: "+atributos[0]+" " +atributos[1]);
                 }
                 break;
             }
