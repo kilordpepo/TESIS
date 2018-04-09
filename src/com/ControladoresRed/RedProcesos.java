@@ -89,7 +89,7 @@ public class RedProcesos extends Thread {
                     ConexionUtils.obtenerInstancia().enviarMensaje("noderesource");
                     ConexionUtils.obtenerInstancia()
                             .enviarMensaje(Fantasma.obtenerInstancia().obtenerIP(Long.parseLong(atributos[0])));
-                    ConexionUtils.obtenerInstancia().cerrarConexion();
+                    //ConexionUtils.obtenerInstancia().cerrarConexion();
                     System.out.println("Enviando datos de nodo");
                 }
                 break;
