@@ -37,8 +37,6 @@ public class TipoNodoCommand extends BaseCommand {
     public void ejecutar(String[] args, OutputStream out) {
         if (args[0].equals("miembro")) {
             SistemaUtil.tipo = "miembro";
-            EjecutarComando.linea("network localhost 2000 central");
-            EjecutarComando.linea("network localhost 2004 miembro");
             ConexionUtils.obtenerInstancia().iniciarConexion(Fantasma.obtenerInstancia().getDireccion(),Fantasma.obtenerInstancia().getPuertopeticion());
             EjecutarComando.linea("listen");
             System.out.println("Se ha asignado el tipo de nodo exitosamente");
