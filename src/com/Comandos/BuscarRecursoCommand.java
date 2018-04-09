@@ -35,6 +35,7 @@ public class BuscarRecursoCommand extends BaseCommand{
         ConexionUtils.obtenerInstancia().iniciarConexion(
                 Fantasma.obtenerInstancia().getDireccion(),
                 Fantasma.obtenerInstancia().getPuertopeticion());
+        ConexionUtils.obtenerInstancia().enviarMensaje("getip");
         ConexionUtils.obtenerInstancia().enviarMensaje(args[0]);
     }
 }
