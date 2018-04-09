@@ -1,9 +1,24 @@
 package com.Comandos;
 
+import com.ControladoresRed.ConexionUtils;
+import com.Entidades.Fantasma;
+
 import java.io.OutputStream;
 
 /**
- * Created by Junior on 01/04/2018.
+ * Universidad Catolica Andres Bello
+ * Facultad de Ingenieria
+ * Escuela de Ingenieria Informatica
+ * Trabajo Especial de Grado
+ * ----------------------------------
+ * Tutor:
+ * --------------
+ * Wilmer Pereira
+ *
+ * Autores:
+ * --------------
+ * Garry Bruno
+ * Carlos Valero
  */
 public class BuscarRecursoCommand extends BaseCommand{
 
@@ -17,6 +32,9 @@ public class BuscarRecursoCommand extends BaseCommand{
 
     @Override
     public void ejecutar(String[] args, OutputStream out) {
-
+        ConexionUtils.obtenerInstancia().iniciarConexion(
+                Fantasma.obtenerInstancia().getDireccion(),
+                Fantasma.obtenerInstancia().getPuertopeticion());
+        ConexionUtils.obtenerInstancia().enviarMensaje(args[0]);
     }
 }

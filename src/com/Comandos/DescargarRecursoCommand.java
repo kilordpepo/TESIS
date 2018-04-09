@@ -1,5 +1,7 @@
 package com.Comandos;
 
+import com.ControladoresRed.ConexionUtils;
+
 import java.io.OutputStream;
 
 /**
@@ -28,6 +30,6 @@ public class DescargarRecursoCommand extends BaseCommand {
 
     @Override
     public void ejecutar(String[] args, OutputStream out) {
-
+        ConexionUtils.obtenerInstancia().enviarMensaje(args[0]);
     }
 }
