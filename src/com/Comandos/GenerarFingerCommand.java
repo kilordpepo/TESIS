@@ -27,11 +27,13 @@ public class GenerarFingerCommand extends BaseCommand {
         for(NodoRF nodo : anillo){
             tabla= new HashMap<Integer,String>();
             for(int i=1;i<=5;i++) {
+                int indice =1;
                 valorFinger = nodo.getHash().intValue() + (2 ^ (i - 1));
                 for(NodoRF aux : anillo){
 
                     if(aux.getHash().intValue() >=valorFinger){
-                        tabla.put(i,aux.getDireccion());
+                        tabla.put(indice,aux.getDireccion());
+                        indice++;
                         break;
                     }
                 }
