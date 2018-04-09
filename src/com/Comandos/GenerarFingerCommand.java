@@ -27,27 +27,28 @@ public class GenerarFingerCommand extends BaseCommand {
         for(NodoRF nodo : anillo){
             tabla= new HashMap<Integer,String>();
             for(int i=1;i<=5;i++) {
-                int indice =1;
+                int indice = 1;
                 valorFinger = nodo.getHash().intValue() + (2 ^ (i - 1));
-                for(NodoRF aux : anillo){
+                for (NodoRF aux : anillo) {
 
-                    if(aux.getHash().intValue() >=valorFinger){
-                        tabla.put(indice,aux.getDireccion());
+                    if (aux.getHash().intValue() >= valorFinger) {
+                        tabla.put(indice, aux.getDireccion());
                         indice++;
                         break;
                     }
                 }
-                if(tabla.isEmpty()){
-                    for(int j =1; j<=5;j++){
-                        tabla.put(j,primero);
+                if (tabla.isEmpty()) {
+                    for (int j = 1; j <= 5; j++) {
+                        tabla.put(j, primero);
                     }
 
                 }
+            }
                 ConexionUtils.obtenerInstancia().iniciarConexion(nodo.getDireccion(),nodo.getPuertopeticion());
                 EnviarMensajeCommand.enviarDato("addtable",nodo.getDireccion(),nodo.getPuertopeticion());
                 EnviarMensajeCommand.enviarDato(tabla,nodo.getDireccion(),nodo.getPuertopeticion());// AQUI SE ENVIA LA TABLA AL NODO
                 //ConexionUtils.obtenerInstancia().cerrarConexion();
-            }
+
         }
     }
 }
