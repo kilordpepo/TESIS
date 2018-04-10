@@ -51,10 +51,11 @@ public class Fantasma extends Miembro  implements Serializable {
     public String obtenerIP(Long iphash){
         String respuesta ="";
         for(NodoRF nodo :this.anillo){
-            if (iphash.equals(nodo.getHash())){
+            if (iphash==nodo.getHash().longValue()){
               respuesta = nodo.getDireccion()+":"+nodo.getPuertopeticion();
             }
         }
+        System.out.println("Se va a mandar: "+ respuesta);
         return respuesta;
     }
 

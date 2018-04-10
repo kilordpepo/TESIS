@@ -76,7 +76,7 @@ public class RedProcesos extends Thread {
                 break;
             }
             case"addtable":{
-                Nodo.getInstancia().setTabla((HashMap<Integer, String>) ois.readObject());
+                Nodo.getInstancia().setTabla((HashMap<Integer, Long>) ois.readObject());
                 System.out.println("Se ha agregado la tabla de forma exitosa");
                 break;
             }
@@ -99,7 +99,8 @@ public class RedProcesos extends Thread {
                 if (object instanceof String){
                     String datos = (String)object;
                     String atributos [] = datos.split(":");
-                    System.out.println("El archivo lo tiene: "+atributos[0]+" " +atributos[1]);
+                    System.out.println("Lo que llega es: " + datos);
+                    //System.out.println("El archivo lo tiene: "+atributos[0]+" " +atributos[1]);
                 }
                 break;
             }

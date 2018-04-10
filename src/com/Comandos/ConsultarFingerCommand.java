@@ -35,7 +35,7 @@ public class ConsultarFingerCommand extends BaseCommand{
         System.out.println("Su tabla finger es");
         System.out.println("---------------------------------");
         int i =1;
-        for (Map.Entry<Integer, String> entry : nodo.getTabla().entrySet()) {
+        for (Map.Entry<Integer, Long> entry : nodo.getTabla().entrySet()) {
             System.out.println("i: "+entry.getKey()+ " Value: "+ entry.getValue());
         }
     }
