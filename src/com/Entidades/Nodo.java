@@ -24,7 +24,7 @@ public class Nodo extends Miembro implements Serializable {
      private int puertoArchivo;
      private ArrayList<Recurso> cola;
      private ArrayList<Recurso> recursos;
-     private HashMap<Integer,String> tablafinger;
+     private HashMap<Integer,Long> tablafinger;
      private static Nodo instancia;
 
     private Nodo(){
@@ -61,11 +61,11 @@ public class Nodo extends Miembro implements Serializable {
         this.recursos = recursos;
     }
 
-    public HashMap<Integer,String> getTabla() {
+    public HashMap<Integer,Long> getTabla() {
         return tablafinger;
     }
 
-    public void setTabla(HashMap<Integer,String> tabla) {
+    public void setTabla(HashMap<Integer,Long> tabla) {
         this.tablafinger = tabla;
     }
 
@@ -85,19 +85,16 @@ public class Nodo extends Miembro implements Serializable {
      * @param archivohash aplicando funcion hash
      * @return none (si no encontro alguno) o la IP (si lo encuentra)
      */
-    public String seleccionarNodo(Long archivohash){
-        String respuesta = "";
+    public Long seleccionarNodo(Long archivohash){
+        Long respuesta = new Long(0);
         Nodo nodo = Nodo.obtenerInstancia();
-        HashMap<Integer,String> tabla = nodo.getTabla();
+        HashMap<Integer,Long> tabla = nodo.getTabla();
 
-        for (String item : tabla.values()){
-            if(archivohash<Math.abs(Long.parseLong(item))){
+        for (Long item : tabla.values()){
+            if(archivohash<Math.abs(item)){
                 respuesta = item;
             }
         }
-        if (respuesta=="")
-         return "none";
-
         return respuesta;
     }
 
