@@ -40,10 +40,11 @@ public class BuscarRecursoCommand extends BaseCommand{
                 Fantasma.obtenerInstancia().getDireccion(),
                 Fantasma.obtenerInstancia().getPuertopeticion());
         ConexionUtils.obtenerInstancia().enviarMensaje("getip");
-            ConexionUtils.obtenerInstancia().enviarMensaje(
+        ConexionUtils.obtenerInstancia().enviarMensaje(
                     Nodo.getInstancia().seleccionarNodo(RespuestaUtils.generarHash(args[0]).longValue())
                     +":"+Nodo.obtenerInstancia().getDireccion()+
             ":"+Integer.toString(Nodo.obtenerInstancia().getPuertopeticion()));
+        Nodo.obtenerInstancia().setEnespera(RespuestaUtils.generarHash(args[0]).longValue());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

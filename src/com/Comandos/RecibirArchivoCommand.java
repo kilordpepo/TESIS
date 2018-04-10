@@ -35,8 +35,9 @@ public class RecibirArchivoCommand extends AsyncCommand {
             DataInputStream dis = null;
             Recurso re = new Recurso();
             String ip =args[0];
-            int puerto = Integer.parseInt(args[1]);
-            String nombre = args[2];
+            int puerto = Integer.parseInt(args[1])+1;
+            Long nombre = Nodo.obtenerInstancia().getEnespera();
+            System.out.println("El nombre del archivo es: " + nombre);
             System.out.println("Iniciando proceso de descarga de archivo");
             // Se abre una conexion con Servidor Socket
             Socket cliente = new Socket(ip, puerto);

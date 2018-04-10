@@ -39,6 +39,7 @@ public class TipoNodoCommand extends BaseCommand {
             SistemaUtil.tipo = "miembro";
             ConexionUtils.obtenerInstancia().iniciarConexion(Fantasma.obtenerInstancia().getDireccion(),Fantasma.obtenerInstancia().getPuertopeticion());
             EjecutarComando.linea("listen");
+            EjecutarComando.linea("listenfile");
             System.out.println("Se ha asignado el tipo de nodo exitosamente");
             EnviarMensajeCommand.enviarDato("addnode",Fantasma.obtenerInstancia().getDireccion(),Fantasma.obtenerInstancia().getPuertopeticion());
             try {

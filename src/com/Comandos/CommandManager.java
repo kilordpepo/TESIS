@@ -47,6 +47,7 @@ public class CommandManager {
         registCommand(GenerarFingerCommand.COMMAND_NAME,GenerarFingerCommand.class);
         registCommand(ConsultarFingerCommand.COMMAND_NAME,ConsultarFingerCommand.class);
         registCommand(VerAnilloCommand.COMMAND_NAME,VerAnilloCommand.class);
+        registCommand(VerRecursosCommand.COMMAND_NAME,VerRecursosCommand.class);
     }
 
     /**

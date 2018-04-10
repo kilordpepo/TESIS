@@ -70,13 +70,11 @@ public class EnviarArchivoCommand  extends AsyncCommand{
             String solicitud = (String)ois.readObject();
             dt = solicitud.split(":");
             //System.out.println("Iniciando proceso de envio del archivo: "+ buscarArchivo(Integer.parseInt(dt[1])));
-            File localFile = new File("recursos/"+dt[1]);
+            System.out.println("La ruta del archivo es: "+Long.parseLong(dt[1]));
+            File localFile = new File(Nodo.obtenerInstancia().buscarRecurso(Long.parseLong(dt[1])).getRuta());
             //System.out.println("Recibido es: " + solicitud);
             //System.out.println("El archivo es: " + buscarArchivo(Integer.parseInt(dt[1])));
-            //re = new Recurso();
-            //re.setNombre(buscarArchivo(Integer.parseInt(dt[1])));
-            //re.setId(ControladorC.sacarHash(re.getNombre()));
-            //re.setEstado("Enviando...");
+            re = Nodo.obtenerInstancia().buscarRecurso(Long.parseLong(dt[1]));
             //Sistema.agregarEnvio(re);
             bis = new BufferedInputStream(new FileInputStream(localFile));
             bos = new BufferedOutputStream(connection.getOutputStream());

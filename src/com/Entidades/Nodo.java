@@ -26,7 +26,7 @@ public class Nodo extends Miembro implements Serializable {
      private ArrayList<Recurso> recursos;
      private HashMap<Integer,Long> tablafinger;
      private static Nodo instancia;
-
+     private Long enespera;
     private Nodo(){
 
     }
@@ -90,6 +90,7 @@ public class Nodo extends Miembro implements Serializable {
         Nodo nodo = Nodo.obtenerInstancia();
         HashMap<Integer,Long> tabla = nodo.getTabla();
 
+
         for (Long item : tabla.values()){
             if(archivohash<Math.abs(item)){
                 respuesta = item;
@@ -98,5 +99,27 @@ public class Nodo extends Miembro implements Serializable {
         return respuesta;
     }
 
+    public Recurso buscarRecurso(Long archivohash){
+        for (Recurso recurso : recursos){
+            if(archivohash==recurso.getHash().longValue())
+                return recurso;
+        }
+        return null;
+    }
 
+    public HashMap<Integer, Long> getTablafinger() {
+        return tablafinger;
+    }
+
+    public void setTablafinger(HashMap<Integer, Long> tablafinger) {
+        this.tablafinger = tablafinger;
+    }
+
+    public Long getEnespera() {
+        return enespera;
+    }
+
+    public void setEnespera(Long enespera) {
+        this.enespera = enespera;
+    }
 }

@@ -1,6 +1,8 @@
 package com.ControladoresRed;
 
 import com.Comandos.EjecutarComando;
+import com.Comandos.EnviarMensajeCommand;
+import com.Comandos.RecibirArchivoCommand;
 import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
 import com.Entidades.NodoRF;
@@ -72,12 +74,15 @@ public class RedProcesos extends Thread {
                     EjecutarComando.linea("deletenode "+direccion);
                     EjecutarComando.linea("order");
                     EjecutarComando.linea("generarFinger");
+                    ConexionUtils.obtenerInstancia().iniciarConexion(direccion,2004);
+                    ConexionUtils.obtenerInstancia().enviarMensaje("finalice");
                 }
                 break;
             }
             case"addtable":{
                 Nodo.getInstancia().setTabla((HashMap<Integer, Long>) ois.readObject());
                 System.out.println("Se ha agregado la tabla de forma exitosa");
+                ConexionUtils.obtenerInstancia().cerrarConexion();
                 break;
             }
             case"getip":{
@@ -88,9 +93,8 @@ public class RedProcesos extends Thread {
                     ConexionUtils.obtenerInstancia().iniciarConexion(atributos[1],Integer.parseInt(atributos[2]));
                     ConexionUtils.obtenerInstancia().enviarMensaje("noderesource");
                     ConexionUtils.obtenerInstancia()
-                            .enviarMensaje(Fantasma.obtenerInstancia().obtenerIP(Long.parseLong(atributos[0])));
-                    //ConexionUtils.obtenerInstancia().cerrarConexion();
-                    System.out.println("Enviando datos de nodo");
+                            .enviarMensaje(Fantasma.obtenerInstancia().obtenerIP(Long.parseLong(atributos[0]))+ ":"+
+                             Long.parseLong(atributos[0]));
                 }
                 break;
             }
@@ -99,7 +103,7 @@ public class RedProcesos extends Thread {
                 if (object instanceof String){
                     String datos = (String)object;
                     String atributos [] = datos.split(":");
-                    System.out.println("Lo que llega es: " + datos);
+                    EjecutarComando.linea("download "+atributos[0]+" "+atributos[1]+" "+atributos[2]);
                     //System.out.println("El archivo lo tiene: "+atributos[0]+" " +atributos[1]);
                 }
                 break;
@@ -112,6 +116,10 @@ public class RedProcesos extends Thread {
 
                 }
                 break;
+            }
+            case"finalice":{
+                ConexionUtils.obtenerInstancia().cerrarConexion();
+                System.exit(0);
             }
         }
 

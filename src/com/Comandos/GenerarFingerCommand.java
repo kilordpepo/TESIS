@@ -23,11 +23,12 @@ public class GenerarFingerCommand extends BaseCommand {
         int valorFinger;
         int suma=2;
         HashMap<Integer,Long> tabla = new HashMap<Integer,Long>();
+        if (!f.getAnillo().isEmpty()){
         Long primero = f.getAnillo().get(0).getHash().longValue();
         ArrayList<NodoRF> anillo = f.getAnillo();
-        for(NodoRF nodo : anillo){
-            tabla= new HashMap<Integer,Long>();
-            for(int i=1;i<=5;i++) {
+        for(NodoRF nodo : anillo) {
+            tabla = new HashMap<Integer, Long>();
+            for (int i = 1; i <= 5; i++) {
                 int indice = 1;
                 valorFinger = nodo.getHash().intValue() + ((int) Math.pow(2, i - 1));
                 for (NodoRF aux : anillo) {
@@ -39,14 +40,14 @@ public class GenerarFingerCommand extends BaseCommand {
                     }
                 }
             }
-                if (tabla.isEmpty()) {
-                        tabla.put(1, primero);
+            if (tabla.isEmpty()) {
+                tabla.put(1, primero);
             }
-                ConexionUtils.obtenerInstancia().iniciarConexion(nodo.getDireccion(),nodo.getPuertopeticion());
-                EnviarMensajeCommand.enviarDato("addtable",nodo.getDireccion(),nodo.getPuertopeticion());
-                EnviarMensajeCommand.enviarDato(tabla,nodo.getDireccion(),nodo.getPuertopeticion());// AQUI SE ENVIA LA TABLA AL NODO
-                //ConexionUtils.obtenerInstancia().cerrarConexion();
-
+            ConexionUtils.obtenerInstancia().iniciarConexion(nodo.getDireccion(), nodo.getPuertopeticion());
+            EnviarMensajeCommand.enviarDato("addtable", nodo.getDireccion(), nodo.getPuertopeticion());
+            EnviarMensajeCommand.enviarDato(tabla, nodo.getDireccion(), nodo.getPuertopeticion());// AQUI SE ENVIA LA TABLA AL NODO
+            //ConexionUtils.obtenerInstancia().cerrarConexion();
+        }
         }
     }
 }

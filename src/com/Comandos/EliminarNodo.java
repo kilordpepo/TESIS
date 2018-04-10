@@ -1,5 +1,6 @@
 package com.Comandos;
 
+import com.ControladoresRed.ConexionUtils;
 import com.Entidades.Fantasma;
 import com.Entidades.NodoRF;
 
@@ -41,7 +42,6 @@ public class EliminarNodo extends BaseCommand {
           index++;
       }
         fantasma.getAnillo().remove(index);
-
     }
 
 

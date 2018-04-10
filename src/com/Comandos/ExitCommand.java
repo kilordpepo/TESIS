@@ -46,7 +46,7 @@ public class ExitCommand extends BaseCommand {
                 EnviarMensajeCommand.enviarDato(Nodo.getInstancia().getDireccion(),
                         Fantasma.obtenerInstancia().getDireccion(),
                         Fantasma.obtenerInstancia().getPuertopeticion());
-                System.exit(0);
+                //System.exit(0);
             }
             if (SistemaUtil.tipo.equals("fantasma")){
                 System.exit(0);

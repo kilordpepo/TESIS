@@ -36,12 +36,14 @@ public class ConexionUtils {
 
     }
 
+
     public static ConexionUtils obtenerInstancia(){
 
         if (conexion==null)
            conexion = new ConexionUtils();
         return conexion;
     }
+
 
 
     public void enviarMensaje(Object dato){
