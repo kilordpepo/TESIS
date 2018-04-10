@@ -89,12 +89,13 @@ public class Nodo extends Miembro implements Serializable {
         Long respuesta = new Long(0);
         Nodo nodo = Nodo.obtenerInstancia();
         HashMap<Integer,Long> tabla = nodo.getTabla();
-
-
         for (Long item : tabla.values()){
             if(archivohash<Math.abs(item)){
                 respuesta = item;
             }
+        }
+        if (respuesta == 0){
+            respuesta = tabla.get(tabla.size());
         }
         return respuesta;
     }

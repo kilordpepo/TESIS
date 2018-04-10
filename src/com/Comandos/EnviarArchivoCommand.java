@@ -42,7 +42,7 @@ public class EnviarArchivoCommand  extends AsyncCommand{
             ServerSocket server = new ServerSocket(nodo.getPuertoArchivo());
             while (true)
             {
-                System.out.printf("ConexionUtils para archivos habilitada y en espera...");
+                System.out.println("ConexionUtils para archivos habilitada y en espera...");
                 Socket socket = server.accept();
                 procesarEnvio(server,socket);
             }
@@ -70,7 +70,6 @@ public class EnviarArchivoCommand  extends AsyncCommand{
             String solicitud = (String)ois.readObject();
             dt = solicitud.split(":");
             //System.out.println("Iniciando proceso de envio del archivo: "+ buscarArchivo(Integer.parseInt(dt[1])));
-            System.out.println("La ruta del archivo es: "+Long.parseLong(dt[1]));
             File localFile = new File(Nodo.obtenerInstancia().buscarRecurso(Long.parseLong(dt[1])).getRuta());
             //System.out.println("Recibido es: " + solicitud);
             //System.out.println("El archivo es: " + buscarArchivo(Integer.parseInt(dt[1])));
