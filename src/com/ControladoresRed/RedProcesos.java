@@ -6,6 +6,7 @@ import com.Comandos.RecibirArchivoCommand;
 import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
 import com.Entidades.NodoRF;
+import com.Utils.RespuestaUtils;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -123,8 +124,16 @@ public class RedProcesos extends Thread {
                         ConexionUtils.obtenerInstancia().enviarMensaje("download");
                         ConexionUtils.obtenerInstancia().enviarMensaje(atributos[0]+":"+atributos[1]+":"+atributos[2]);
                     }else{
-                        //Aqui mandamos a redireccionar.
-
+                        /*
+                        System.out.println("Redireccionando busqueda...");
+                        ConexionUtils.obtenerInstancia().iniciarConexion(
+                                Fantasma.obtenerInstancia().getDireccion(),
+                                Fantasma.obtenerInstancia().getPuertopeticion());
+                        ConexionUtils.obtenerInstancia().enviarMensaje("getip");
+                        ConexionUtils.obtenerInstancia().enviarMensaje(
+                                Nodo.getInstancia().seleccionarNodo(Long.parseLong(atributos[0]))
+                                        +":"+atributos[1]+":"+atributos[2]);
+                        */
                     }
                 }
                 break;
