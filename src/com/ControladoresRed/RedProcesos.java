@@ -9,6 +9,7 @@ import com.Entidades.NodoRF;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 /**
@@ -103,11 +104,57 @@ public class RedProcesos extends Thread {
                 if (object instanceof String){
                     String datos = (String)object;
                     String atributos [] = datos.split(":");
-                    EjecutarComando.linea("download "+atributos[0]+" "+atributos[1]+" "+atributos[2]);
-                    //System.out.println("El archivo lo tiene: "+atributos[0]+" " +atributos[1]);
+                    ConexionUtils.obtenerInstancia().iniciarConexion(atributos[0],Integer.parseInt(atributos[1]));
+                    ConexionUtils.obtenerInstancia().enviarMensaje("havefile");
+                    ConexionUtils.obtenerInstancia().enviarMensaje(Nodo.obtenerInstancia().getEnespera()+":"+
+                    atributos[0]+":"+Integer.parseInt(atributos[1]));
+
                 }
                 break;
             }
+
+            case"havefile":{
+                Object object =  ois.readObject();
+                if (object instanceof String){
+                    String datos = (String)object;
+                    String atributos[] = datos.split(":");
+                    if(Nodo.getInstancia().buscarRecurso(Long.parseLong(atributos[0]))!=null){
+                        ConexionUtils.obtenerInstancia().iniciarConexion(atributos[1],Integer.parseInt(atributos[2]));
+                        ConexionUtils.obtenerInstancia().enviarMensaje("download");
+                        ConexionUtils.obtenerInstancia().enviarMensaje(atributos[0]+":"+atributos[1]+":"+atributos[2]);
+                    }else{
+                        //Aqui mandamos a redireccionar.
+
+                    }
+                }
+                break;
+            }
+
+            case"download":{
+                Object object =  ois.readObject();
+                if (object instanceof String) {
+                    String datos = (String) object;
+                    String atributos[] = datos.split(":");
+
+                    if (Nodo.getInstancia().buscarRecurso(Long.parseLong(atributos[0])) != null) {
+                        ConexionUtils.obtenerInstancia().iniciarConexion(atributos[1], Integer.parseInt(atributos[2]));
+                        EjecutarComando.linea("download "+atributos[1]+" "+atributos[2]+" "+atributos[0]);
+                    }
+                }
+
+            }
+
+            case"redirect":{
+                Object object =  ois.readObject();
+                if (object instanceof String){
+                    String datos = (String)object;
+                    String atributos [] = datos.split(":");
+                    Nodo.getInstancia().seleccionarNodo(Long.parseLong(atributos[0]));
+
+                }
+                break;
+            }
+
             case"getresourse":{
                 Object object =  ois.readObject();
                 if (object instanceof String){

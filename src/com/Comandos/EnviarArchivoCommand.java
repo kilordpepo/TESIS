@@ -69,41 +69,38 @@ public class EnviarArchivoCommand  extends AsyncCommand{
             ObjectInputStream ois = new ObjectInputStream(connection.getInputStream());
             String solicitud = (String)ois.readObject();
             dt = solicitud.split(":");
-            //System.out.println("Iniciando proceso de envio del archivo: "+ buscarArchivo(Integer.parseInt(dt[1])));
             File localFile = new File(Nodo.obtenerInstancia().buscarRecurso(Long.parseLong(dt[1])).getRuta());
-            //System.out.println("Recibido es: " + solicitud);
-            //System.out.println("El archivo es: " + buscarArchivo(Integer.parseInt(dt[1])));
             re = Nodo.obtenerInstancia().buscarRecurso(Long.parseLong(dt[1]));
-            //Sistema.agregarEnvio(re);
-            bis = new BufferedInputStream(new FileInputStream(localFile));
-            bos = new BufferedOutputStream(connection.getOutputStream());
-            //Enviamos el nombre del fichero
-            DataOutputStream dos=new DataOutputStream(connection.getOutputStream());
-            dos.writeUTF(localFile.getName()+":"+Integer.toString((int)localFile.length()));
-            int tamano = (int)localFile.length();
-            if((int)ois.readObject()==0){
-                //Enviamos el fichero
-                //re.setTamano(tamano);
-                byteArray = new byte[(int)localFile.length()];
-                //Mando:
-                int k=0;
-                while ((in = bis.read(byteArray)) != -1){
-                    bos.write(byteArray,0,in);
-                    k+=in;
+            if (re!=null) {
+                bis = new BufferedInputStream(new FileInputStream(localFile));
+                bos = new BufferedOutputStream(connection.getOutputStream());
+                //Enviamos el nombre del fichero
+                DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
+                dos.writeUTF(localFile.getName() + ":" + Integer.toString((int) localFile.length()));
+                int tamano = (int) localFile.length();
+                if ((int) ois.readObject() == 0) {
+                    //Enviamos el fichero
+                    re.setTamano(tamano);
+                    byteArray = new byte[(int) localFile.length()];
+                    //Mando:
+                    int k = 0;
+                    while ((in = bis.read(byteArray)) != -1) {
+                        bos.write(byteArray, 0, in);
+                        k += in;
+                    }
+                } else {
+                    //re.setTamano(tamano);
+                    byteArray = new byte[tamano / 2];
+                    bis.skip(new Long(tamano / 2));
+                    while ((in = bis.read(byteArray, 0, byteArray.length)) != -1) {
+                        bos.write(byteArray, 0, in);
+                    }
                 }
+                // Se cierra la conexion
+                bis.close();
+                bos.close();
+                System.out.println("Envio de Archivo finalizado!");
             }
-            else{
-                //re.setTamano(tamano);
-                byteArray = new byte[tamano/2];
-                bis.skip(new Long(tamano/2));
-                while ((in = bis.read(byteArray,0,byteArray.length)) != -1){
-                    bos.write(byteArray,0,in);
-                }
-            }
-            // Se cierra la conexion
-            bis.close();
-            bos.close();
-            System.out.println("Envio de Archivo finalizado!");
         }catch ( Exception e ) {
             Logger.getLogger(EnviarArchivoCommand.class.getName()).log(Level.SEVERE, null, e);
         }

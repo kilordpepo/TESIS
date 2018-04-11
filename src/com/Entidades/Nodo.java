@@ -27,6 +27,8 @@ public class Nodo extends Miembro implements Serializable {
      private HashMap<Integer,Long> tablafinger;
      private static Nodo instancia;
      private Long enespera;
+     private String redireccion;
+
     private Nodo(){
 
     }
@@ -78,6 +80,14 @@ public class Nodo extends Miembro implements Serializable {
         Nodo.instancia = instancia;
     }
 
+    public String getRedireccion() {
+        return redireccion;
+    }
+
+    public void setRedireccion(String redireccion) {
+        this.redireccion = redireccion;
+    }
+
     /**
      * Metodo que se encarga de devolver los datos de un nodo determinado dato el identificador
      * en hash de un archivo. Este revisa en la tabla finger quien es el nodo que es probable
@@ -103,6 +113,14 @@ public class Nodo extends Miembro implements Serializable {
     public Recurso buscarRecurso(Long archivohash){
         for (Recurso recurso : recursos){
             if(archivohash==recurso.getHash().longValue())
+                return recurso;
+        }
+        return null;
+    }
+
+    public Recurso buscarRecurso(String archivo){
+        for (Recurso recurso : recursos){
+            if(archivo.equals(recurso.getNombre()))
                 return recurso;
         }
         return null;
