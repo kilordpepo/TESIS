@@ -84,6 +84,7 @@ public class RedProcesos extends Thread {
             case"addtable":{
                     Nodo.getInstancia().setTabla((HashMap<Integer, Long>)mensaje.getData());
                     System.out.println("Se ha agregado la tabla de forma exitosa");
+                    oos.writeObject("");
                 break;
             }
             case"getip":{
