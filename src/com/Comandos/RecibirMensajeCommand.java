@@ -1,6 +1,7 @@
 package com.Comandos;
 
 import com.ControladoresRed.ConexionUtils;
+import com.ControladoresRed.Mensaje;
 import com.ControladoresRed.RedProcesos;
 import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
@@ -56,13 +57,13 @@ public class RecibirMensajeCommand extends AsyncCommand{
                     System.out.println("ConexionUtils habilitada y en espera...");
                     Socket recibo = recepcion.accept();
                     ObjectInputStream ois = new ObjectInputStream(recibo.getInputStream());
-                    ObjectOutputStream salidaObjeto = new ObjectOutputStream(recibo.getOutputStream());
+                    ObjectOutputStream oos = new ObjectOutputStream(recibo.getOutputStream());
                     //Mensaje que llega:
                     Object mensaje = ois.readObject();
                     //Falta ejecutar acciones dependiendo del mensaje
-                    String tipo = (String) mensaje;
+                    Mensaje data = (Mensaje) mensaje;
                     //Se ejecuta un hilo con el proceso
-                    new RedProcesos(tipo,ois).run();
+                    new RedProcesos(data,ois,oos).run();
 
                 }
 

@@ -50,6 +50,6 @@ public class EnviarMensajeCommand extends BaseCommand {
      * @return
      */
     public static void enviarDato(Object dato,String ip, int puerto){
-        ConexionUtils.obtenerInstancia().enviarMensaje(dato);
+      //  ConexionUtils.obtenerInstancia().enviarMensaje(dato);
     }
 }

@@ -1,6 +1,7 @@
 package com.Comandos;
 
 import com.ControladoresRed.ConexionUtils;
+import com.ControladoresRed.Mensaje;
 import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
 import com.Entidades.NodoRF;
@@ -35,18 +36,12 @@ public class ExitCommand extends BaseCommand {
 
     @Override
     public void ejecutar(String[] args, OutputStream out) {
-
             if (SistemaUtil.tipo.equals("miembro")) {
-                ConexionUtils.obtenerInstancia()
-                        .iniciarConexion(Fantasma.obtenerInstancia().getDireccion(),
-                                Fantasma.obtenerInstancia().getPuertopeticion());
-                EnviarMensajeCommand.enviarDato("deletenode",
-                        Fantasma.obtenerInstancia().getDireccion(),
-                        Fantasma.obtenerInstancia().getPuertopeticion());
-                EnviarMensajeCommand.enviarDato(Nodo.getInstancia().getDireccion(),
-                        Fantasma.obtenerInstancia().getDireccion(),
-                        Fantasma.obtenerInstancia().getPuertopeticion());
-                //System.exit(0);
+                Mensaje mensaje =(Mensaje)ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("deletenode",
+                        Nodo.getInstancia(),Fantasma.obtenerInstancia()));
+                if (mensaje.getFuncion().equals("finalice")){
+                    System.exit(0);
+                }
             }
             if (SistemaUtil.tipo.equals("fantasma")){
                 System.exit(0);

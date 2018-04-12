@@ -111,9 +111,14 @@ public class Nodo extends Miembro implements Serializable {
     }
 
     public Recurso buscarRecurso(Long archivohash){
+
         for (Recurso recurso : recursos){
-            if(archivohash==recurso.getHash().longValue())
+            Long hash = recurso.getHash().longValue();
+
+            if(archivohash.equals(hash)){
                 return recurso;
+            }
+
         }
         return null;
     }

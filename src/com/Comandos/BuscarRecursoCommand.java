@@ -1,8 +1,10 @@
 package com.Comandos;
 
 import com.ControladoresRed.ConexionUtils;
+import com.ControladoresRed.Mensaje;
 import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
+import com.Entidades.NodoRF;
 import com.Utils.RespuestaUtils;
 
 import java.io.OutputStream;
@@ -36,18 +38,16 @@ public class BuscarRecursoCommand extends BaseCommand{
     @Override
     public void ejecutar(String[] args, OutputStream out) {
         try {
-        ConexionUtils.obtenerInstancia().iniciarConexion(
-                Fantasma.obtenerInstancia().getDireccion(),
-                Fantasma.obtenerInstancia().getPuertopeticion());
-
-
-        ConexionUtils.obtenerInstancia().enviarMensaje("getip");
-        ConexionUtils.obtenerInstancia().enviarMensaje(
-                    Nodo.getInstancia().seleccionarNodo(RespuestaUtils.generarHash(args[0]).longValue())
-                    +":"+Nodo.obtenerInstancia().getDireccion()+
-            ":"+Integer.toString(Nodo.obtenerInstancia().getPuertopeticion()));
-        Nodo.obtenerInstancia().setEnespera(RespuestaUtils.generarHash(args[0]).longValue());
-
+            Long hash = RespuestaUtils.generarHash(args[0]).longValue();
+            Long hashnode = Nodo.obtenerInstancia().seleccionarNodo(hash);
+            //Obtiene la IP y Descarga el archivo
+            Mensaje mensaje = new Mensaje("getip",hashnode,Fantasma.obtenerInstancia());
+            Mensaje respuesta = (Mensaje) ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
+            NodoRF nodo = (NodoRF) respuesta.getData();
+            mensaje = new Mensaje("download",hash,nodo);
+            mensaje = (Mensaje)ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
+            Nodo nodor = (Nodo)mensaje.getData();
+            EjecutarComando.linea("download "+nodor.getDireccion()+" "+nodor.getPuertopeticion()+" "+hash);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

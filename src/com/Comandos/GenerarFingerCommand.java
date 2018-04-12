@@ -1,6 +1,7 @@
 package com.Comandos;
 
 import com.ControladoresRed.ConexionUtils;
+import com.ControladoresRed.Mensaje;
 import com.Entidades.Fantasma;
 import com.Entidades.NodoRF;
 
@@ -43,10 +44,7 @@ public class GenerarFingerCommand extends BaseCommand {
             if (tabla.isEmpty()) {
                 tabla.put(1, primero);
             }
-            ConexionUtils.obtenerInstancia().iniciarConexion(nodo.getDireccion(), nodo.getPuertopeticion());
-            EnviarMensajeCommand.enviarDato("addtable", nodo.getDireccion(), nodo.getPuertopeticion());
-            EnviarMensajeCommand.enviarDato(tabla, nodo.getDireccion(), nodo.getPuertopeticion());// AQUI SE ENVIA LA TABLA AL NODO
-            //ConexionUtils.obtenerInstancia().cerrarConexion();
+            ConexionUtils.obtenerInstancia().enviar(new Mensaje("addtable",tabla,nodo));
         }
         }
     }
