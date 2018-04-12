@@ -44,7 +44,7 @@ public class BuscarRecursoCommand extends BaseCommand{
             Mensaje mensaje = new Mensaje("getip",hashnode,Fantasma.obtenerInstancia());
             Mensaje respuesta = (Mensaje) ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
             NodoRF nodo = (NodoRF) respuesta.getData();
-            mensaje = new Mensaje("download",hash,nodo);
+            mensaje = new Mensaje("download",hash,Nodo.getInstancia(),nodo);
             mensaje = (Mensaje)ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
             if (mensaje!=null){
               Nodo nodor = (Nodo)mensaje.getData();

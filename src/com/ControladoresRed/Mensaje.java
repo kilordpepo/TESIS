@@ -24,12 +24,20 @@ public class Mensaje implements Serializable {
 
     private String funcion;
     private Object data;
+    private Miembro origen;
     private Miembro destino;
 
     public Mensaje(String funcion, Object data, Miembro destino) {
         this.funcion = funcion;
         this.data = data;
         this.destino = destino;
+    }
+
+    public Mensaje(String funcion, Object data,Miembro origen, Miembro destino) {
+        this.funcion = funcion;
+        this.data = data;
+        this.destino = destino;
+        this.origen = origen;
     }
 
     public String getFuncion() {
@@ -54,5 +62,13 @@ public class Mensaje implements Serializable {
 
     public void setDestino(Miembro destino) {
         this.destino = destino;
+    }
+
+    public Miembro getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(Miembro origen) {
+        this.origen = origen;
     }
 }

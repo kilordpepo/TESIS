@@ -114,8 +114,8 @@ public class RedProcesos extends Thread {
                         Mensaje data = new Mensaje("getip",hashnode,Fantasma.obtenerInstancia());
                         Mensaje respuesta = (Mensaje) ConexionUtils.obtenerInstancia().enviarMensaje(data);
                         NodoRF nodo = (NodoRF) respuesta.getData();
-                        if (!nodo.getDireccion().equals(mensaje.getDestino())){
-                        data = new Mensaje("download",hash,nodo);
+                        if (!nodo.getDireccion().equals(mensaje.getOrigen().getDireccion())){
+                        data = new Mensaje("download",hash,Nodo.getInstancia(),nodo);
                         nodo = (NodoRF)ConexionUtils.obtenerInstancia().enviarMensaje(data);
                         oos.writeObject(nodo);
                         }else{
