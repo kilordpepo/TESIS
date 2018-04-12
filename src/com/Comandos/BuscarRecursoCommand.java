@@ -46,8 +46,12 @@ public class BuscarRecursoCommand extends BaseCommand{
             NodoRF nodo = (NodoRF) respuesta.getData();
             mensaje = new Mensaje("download",hash,nodo);
             mensaje = (Mensaje)ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
-            Nodo nodor = (Nodo)mensaje.getData();
-            EjecutarComando.linea("download "+nodor.getDireccion()+" "+nodor.getPuertopeticion()+" "+hash);
+            if (mensaje!=null){
+              Nodo nodor = (Nodo)mensaje.getData();
+              EjecutarComando.linea("download "+nodor.getDireccion()+" "+nodor.getPuertopeticion()+" "+hash);
+            }else{
+                System.out.println("Archivo no encontrado");
+            }
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
