@@ -1,11 +1,16 @@
 package com.Comandos;
 
+import com.ControladoresRed.ConexionUtils;
+import com.ControladoresRed.Mensaje;
+import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
+import com.Entidades.NodoRF;
 import com.Entidades.Recurso;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -102,7 +107,14 @@ public class EnviarArchivoCommand  extends AsyncCommand{
                 System.out.println("Envio de Archivo finalizado!");
             }
         }catch ( Exception e ) {
-            Logger.getLogger(EnviarArchivoCommand.class.getName()).log(Level.SEVERE, null, e);
+            //Logger.getLogger(EnviarArchivoCommand.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("Envio fallido!");
+            try {
+                Mensaje mensaje =(Mensaje) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("deletenode",
+                        new NodoRF(dt[2],Integer.parseInt(dt[3])), Fantasma.obtenerInstancia()));
+            } catch (NoSuchAlgorithmException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 

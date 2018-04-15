@@ -45,9 +45,11 @@ public class RecibirArchivoCommand extends AsyncCommand {
             System.out.println("Iniciando proceso de descarga de archivo");
             // Se abre una conexion con Servidor Socket
             Socket cliente = new Socket(ip, puerto);
+            cliente.setSoTimeout(5000);
             ObjectOutputStream salidaObjeto = new ObjectOutputStream(cliente.getOutputStream());
             //Solicito el archivo:
-            salidaObjeto.writeObject("4:" + nombre);
+            salidaObjeto.writeObject("4:" + nombre+":"+Nodo.getInstancia().getDireccion()
+                    +":"+Nodo.getInstancia().getPuertopeticion());
             bis = new BufferedInputStream(cliente.getInputStream());
             dis = new DataInputStream(cliente.getInputStream());
             //Recibimos el nombre del fichero
