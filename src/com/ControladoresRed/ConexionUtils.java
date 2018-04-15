@@ -69,15 +69,15 @@ public class ConexionUtils {
                     EjecutarComando.linea("deletenode " + ((Nodo) dato.getDestino()).getDireccion() + " "
                             + ((Nodo) dato.getDestino()).getPuertopeticion());
                     EjecutarComando.linea("order");
-                    //if (Fantasma.obtenerInstancia().getAnillo().size()!=0)
-                    //EjecutarComando.linea("generarFinger -p");
+                    if (Fantasma.obtenerInstancia().getAnillo().size()!=0)
+                    EjecutarComando.linea("generarFinger");
                 }else if (dato.getDestino() instanceof NodoRF){
                     System.out.println("Los datos del nodo son "+((NodoRF) dato.getDestino()).getPuertopeticion());
                     EjecutarComando.linea("deletenode " + ((NodoRF) dato.getDestino()).getDireccion() + " "
                             + ((NodoRF) dato.getDestino()).getPuertopeticion());
                     EjecutarComando.linea("order");
-                    //if (Fantasma.obtenerInstancia().getAnillo().size()!=0)
-                    //EjecutarComando.linea("generarFinger -p");
+                    if (Fantasma.obtenerInstancia().getAnillo().size()!=0)
+                    EjecutarComando.linea("generarFinger");
 
                 }
             }

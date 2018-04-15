@@ -114,7 +114,7 @@ public class RedProcesos extends Thread {
             case"download":{
                     Long hash = (Long) mensaje.getData();
                     if (Nodo.getInstancia().buscarRecurso(hash) != null) {
-                        oos.writeObject(new Mensaje("havefile",mensaje.getOrigen(),Nodo.getInstancia()));
+                        oos.writeObject(new Mensaje("havefile",Nodo.getInstancia(),Nodo.getInstancia()));
                     }else {
                         System.out.println("redireccionando...");
                         Long hashnode = Nodo.obtenerInstancia().seleccionarNodo(hash);
