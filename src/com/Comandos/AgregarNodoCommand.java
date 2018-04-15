@@ -22,7 +22,7 @@ import java.security.NoSuchAlgorithmException;
  * Garry Bruno
  * Carlos Valero
  */
-public class AgregarNodo extends BaseCommand {
+public class AgregarNodoCommand extends BaseCommand {
 
     public static final String COMMAND_NAME="addnode";
 
@@ -35,9 +35,21 @@ public class AgregarNodo extends BaseCommand {
     public void ejecutar(String[] args, OutputStream out) {
         Fantasma fantasma = Fantasma.obtenerInstancia();
         try {
-            fantasma.getAnillo().add(new NodoRF(args[0],Integer.parseInt(args[1])));
+            if (!existe(args[0],Integer.parseInt(args[1])))
+               fantasma.getAnillo().add(new NodoRF(args[0],Integer.parseInt(args[1])));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean existe(String ip,int puerto){
+        for(NodoRF nodo: Fantasma.obtenerInstancia().getAnillo())
+        {
+            if ((nodo.getDireccion().equals(ip))&&(nodo.getPuertopeticion()==puerto))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -45,10 +45,22 @@ public class OrganizarAnilloCommand extends BaseCommand{
         Collections.sort(original);
         for(int elemento : original){
             for(NodoRF organizando : fantasma.getAnillo()){
-                if (elemento == organizando.getHash().intValue())
+                if ((elemento == organizando.getHash().intValue())&&(!existe(organizando.getDireccion()
+                        ,organizando.getPuertopeticion(),resultado)))
                     resultado.add(organizando);
             }
         }
         fantasma.setAnillo(resultado);
+    }
+
+    public boolean existe(String ip,int puerto,ArrayList<NodoRF> list){
+        for(NodoRF nodo: list)
+        {
+            if ((nodo.getDireccion().equals(ip))&&(nodo.getPuertopeticion()==puerto))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

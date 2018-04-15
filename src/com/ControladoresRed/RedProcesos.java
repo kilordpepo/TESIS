@@ -74,8 +74,7 @@ public class RedProcesos extends Thread {
             }
             case"deletenode":{
                     Nodo nodo = (Nodo) mensaje.getData();
-                    String direccion = nodo.getDireccion();
-                    EjecutarComando.linea("deletenode "+direccion);
+                    EjecutarComando.linea("deletenode "+nodo.getDireccion()+" "+nodo.getPuertopeticion());
                     EjecutarComando.linea("order");
                     oos.writeObject(new Mensaje("finalice","",nodo));
                     EjecutarComando.linea("generarFinger");
@@ -125,14 +124,7 @@ public class RedProcesos extends Thread {
             }
 
             case"redirect":{
-                /*Object object =  ois.readObject();
-                if (object instanceof String){
-                    String datos = (String)object;
-                    String atributos [] = datos.split(":");
-                    Nodo.getInstancia().seleccionarNodo(Long.parseLong(atributos[0]));
 
-                }
-                */
                 break;
             }
 

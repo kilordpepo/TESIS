@@ -31,11 +31,11 @@ public class VerAnilloCommand extends BaseCommand {
 
     @Override
     public void ejecutar(String[] args, OutputStream out) {
-        System.out.println("El anillo se compone por: ");
+        System.out.println("El anillo se compone por:  (Longitud: "+Fantasma.obtenerInstancia().getAnillo().size()+" )");
         System.out.println("-----------------------------------------------------------");
         int i =0;
         for (NodoRF nodo : Fantasma.obtenerInstancia().getAnillo()){
-            System.out.println(i + "- Direccion: "+ nodo.getDireccion()+" Hash: "+ nodo.getHash());
+            System.out.println(i + "- Direccion: "+ nodo.getDireccion()+" Hash: "+ nodo.getHash()+" Puerto: "+nodo.getPuertopeticion());
         }
     }
 }
