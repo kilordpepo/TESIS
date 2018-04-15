@@ -27,7 +27,7 @@ public class VerHashRecursoCommand extends BaseCommand {
             System.out.println("Su tabla finger es");
             System.out.println("---------------------------------");
             int i = 1;
-            for (Map.Entry<NodoRF, Long> entry : nodo.getTablaRecursos().entrySet()) {
+            for (Map.Entry<Nodo, Long> entry : nodo.getTablaRecursos().entrySet()) {
                 System.out.println("i: " + entry.getKey() + " Value: " + entry.getValue());
             }
         }else {
