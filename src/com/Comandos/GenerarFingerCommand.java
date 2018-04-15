@@ -7,6 +7,7 @@ import com.Entidades.NodoRF;
 
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 
 public class GenerarFingerCommand extends BaseCommand {
@@ -27,25 +28,30 @@ public class GenerarFingerCommand extends BaseCommand {
         if (!f.getAnillo().isEmpty()){
         Long primero = f.getAnillo().get(0).getHash().longValue();
         ArrayList<NodoRF> anillo = f.getAnillo();
-        for(NodoRF nodo : anillo) {
-            tabla = new HashMap<Integer, Long>();
-            for (int i = 1; i <= 5; i++) {
-                int indice = 1;
-                valorFinger = nodo.getHash().intValue() + ((int) Math.pow(2, i - 1));
-                for (NodoRF aux : anillo) {
+            try {
+                for (NodoRF nodo : anillo) {
+                    tabla = new HashMap<Integer, Long>();
+                    for (int i = 1; i <= 5; i++) {
+                        int indice = 1;
+                        valorFinger = nodo.getHash().intValue() + ((int) Math.pow(2, i - 1));
+                        for (NodoRF aux : anillo) {
 
-                    if (aux.getHash().intValue() >= valorFinger) {
-                        tabla.put(indice, aux.getHash().longValue());
-                        indice += 1;
-                        break;
+                            if (aux.getHash().intValue() >= valorFinger) {
+                                tabla.put(indice, aux.getHash().longValue());
+                                indice += 1;
+                                break;
+                            }
+                        }
                     }
+                    if (tabla.isEmpty()) {
+                        tabla.put(1, primero);
+                    }
+                    ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("addtable", tabla, nodo));
                 }
+            }catch(ConcurrentModificationException e){
+
+
             }
-            if (tabla.isEmpty()) {
-                tabla.put(1, primero);
-            }
-            ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("addtable",tabla,nodo));
-        }
         }
     }
 }

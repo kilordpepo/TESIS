@@ -1,11 +1,16 @@
 package com.Comandos;
 
+import com.ControladoresRed.ConexionUtils;
+import com.ControladoresRed.Mensaje;
+import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
+import com.Entidades.NodoRF;
 import com.Entidades.Recurso;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -100,7 +105,14 @@ public class RecibirArchivoCommand extends AsyncCommand {
             dis.close();
             System.out.println("Finalizando proceso de descarga de archivo");
         } catch (Exception e) {
-            Logger.getLogger(RecibirArchivoCommand.class.getName()).log(Level.SEVERE, null, e);
+            //Logger.getLogger(RecibirArchivoCommand.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("Descarga fallida!");
+            try {
+                Mensaje mensaje =(Mensaje) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("deletenode",
+                        new NodoRF(args[0],Integer.parseInt(args[1])), Fantasma.obtenerInstancia()));
+            } catch (NoSuchAlgorithmException e1) {
+                e1.printStackTrace();
+            }
         }
 
     }

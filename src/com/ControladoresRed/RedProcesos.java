@@ -73,11 +73,19 @@ public class RedProcesos extends Thread {
                 break;
             }
             case"deletenode":{
-                    Nodo nodo = (Nodo) mensaje.getData();
-                    EjecutarComando.linea("deletenode "+nodo.getDireccion()+" "+nodo.getPuertopeticion());
-                    EjecutarComando.linea("order");
-                    oos.writeObject(new Mensaje("finalice","",nodo));
-                    EjecutarComando.linea("generarFinger");
+                    if (mensaje.getData() instanceof Nodo) {
+                        Nodo nodo = (Nodo) mensaje.getData();
+                        EjecutarComando.linea("deletenode " + nodo.getDireccion() + " " + nodo.getPuertopeticion());
+                        EjecutarComando.linea("order");
+                        oos.writeObject(new Mensaje("finalice", "", nodo));
+                        EjecutarComando.linea("generarFinger");
+                    }else if (mensaje.getData() instanceof  NodoRF){
+                        NodoRF nodo = (NodoRF) mensaje.getData();
+                        EjecutarComando.linea("deletenode " + nodo.getDireccion() + " " + nodo.getPuertopeticion());
+                        EjecutarComando.linea("order");
+                        oos.writeObject(new Mensaje("finalice", "", nodo));
+                        EjecutarComando.linea("generarFinger");
+                    }
                 break;
             }
             case"addtable":{

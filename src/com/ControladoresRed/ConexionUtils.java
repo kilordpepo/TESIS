@@ -1,8 +1,12 @@
 package com.ControladoresRed;
 
+import com.Comandos.EjecutarComando;
 import com.Comandos.RecibirArchivoCommand;
+import com.Entidades.Fantasma;
+import com.Entidades.Nodo;
 import com.Entidades.NodoRF;
 import com.Entidades.Recurso;
+import com.Utils.SistemaUtil;
 
 import java.io.*;
 import java.net.Socket;
@@ -53,7 +57,30 @@ public class ConexionUtils {
             reves.close();
             return respuesta;
         } catch (IOException ex) {
-            Logger.getLogger(ConexionUtils.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ConexionUtils.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Hay un nodo no existente en la red");
+            if (SistemaUtil.tipo.equals("miembro")) {
+                Mensaje mensaje =(Mensaje)ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("deletenode",
+                        dato.getDestino(), Fantasma.obtenerInstancia()));
+            }else if (SistemaUtil.tipo.equals("fantasma")){
+
+                if (dato.getDestino() instanceof Nodo) {
+                    System.out.println("Los datos del nodo son "+((Nodo) dato.getDestino()).getPuertopeticion());
+                    EjecutarComando.linea("deletenode " + ((Nodo) dato.getDestino()).getDireccion() + " "
+                            + ((Nodo) dato.getDestino()).getPuertopeticion());
+                    EjecutarComando.linea("order");
+                    //if (Fantasma.obtenerInstancia().getAnillo().size()!=0)
+                    //EjecutarComando.linea("generarFinger -p");
+                }else if (dato.getDestino() instanceof NodoRF){
+                    System.out.println("Los datos del nodo son "+((NodoRF) dato.getDestino()).getPuertopeticion());
+                    EjecutarComando.linea("deletenode " + ((NodoRF) dato.getDestino()).getDireccion() + " "
+                            + ((NodoRF) dato.getDestino()).getPuertopeticion());
+                    EjecutarComando.linea("order");
+                    //if (Fantasma.obtenerInstancia().getAnillo().size()!=0)
+                    //EjecutarComando.linea("generarFinger -p");
+
+                }
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConexionUtils.class.getName()).log(Level.SEVERE, null, ex);
         }

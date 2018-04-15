@@ -31,12 +31,16 @@ public class ConsultarFingerCommand extends BaseCommand{
 
     @Override
     public void ejecutar(String[] args, OutputStream out) {
-        Nodo nodo = Nodo.obtenerInstancia();
-        System.out.println("Su tabla finger es");
-        System.out.println("---------------------------------");
-        int i =1;
-        for (Map.Entry<Integer, Long> entry : nodo.getTabla().entrySet()) {
-            System.out.println("i: "+entry.getKey()+ " Value: "+ entry.getValue());
+        if (Nodo.getInstancia().getTabla()!=null) {
+            Nodo nodo = Nodo.obtenerInstancia();
+            System.out.println("Su tabla finger es");
+            System.out.println("---------------------------------");
+            int i = 1;
+            for (Map.Entry<Integer, Long> entry : nodo.getTabla().entrySet()) {
+                System.out.println("i: " + entry.getKey() + " Value: " + entry.getValue());
+            }
+        }else {
+            System.out.println("Usted es un fantasma!. Esta funcion no esta disponible");
         }
     }
 }
