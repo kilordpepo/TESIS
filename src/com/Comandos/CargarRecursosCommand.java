@@ -1,6 +1,10 @@
 package com.Comandos;
 
+import com.ControladoresRed.ConexionUtils;
+import com.ControladoresRed.Mensaje;
+import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
+import com.Entidades.NodoRF;
 import com.Entidades.Recurso;
 import com.Utils.RespuestaUtils;
 
@@ -51,6 +55,12 @@ public class CargarRecursosCommand extends BaseCommand {
                 recurso.setRuta(archivo.getPath());
                 recurso.setPropietario(nodo.getDireccion());
                 recursos.add(recurso);
+                Long hashnode = Nodo.obtenerInstancia().seleccionarNodo(recurso.getHash().longValue());
+                //Obtiene la IP y Descarga el archivo
+                Mensaje mensaje = new Mensaje("getip",hashnode, Fantasma.obtenerInstancia());
+                Mensaje respuesta = (Mensaje) ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
+                ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("resource",recurso.getHash(),
+                        Nodo.getInstancia(),(NodoRF)respuesta.getData()));
             }
             nodo.setRecursos(recursos);
         } catch (NoSuchAlgorithmException e) {

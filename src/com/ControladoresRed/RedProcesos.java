@@ -129,10 +129,24 @@ public class RedProcesos extends Thread {
                             oos.writeObject(null);
                         }
                     }
+                break;
             }
 
-            case"redirect":{
+            case"resource":{
 
+                Nodo nodo =(Nodo)mensaje.getOrigen();
+                Long hash = (Long)mensaje.getData();
+                if (hash<=Nodo.getInstancia().getHash().longValue()) {
+                    Nodo.getInstancia().getTablaRecursos().put(nodo, hash);
+                    System.out.println("Actualizando tabla de recursos");
+                    oos.writeObject("asignado");
+                }else{
+                    Long hashnode = Nodo.obtenerInstancia().seleccionarNodo(hash);
+                    Mensaje ms= new Mensaje("getip",hashnode, Fantasma.obtenerInstancia());
+                    Mensaje respuesta = (Mensaje) ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
+                    ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("resource",hash,
+                            nodo,(NodoRF)respuesta.getData()));
+                }
                 break;
             }
 
