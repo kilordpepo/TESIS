@@ -1,6 +1,7 @@
 package com.Comandos;
 
 import com.Entidades.Nodo;
+import com.Entidades.NodoRF;
 
 import java.io.OutputStream;
 import java.util.Map;
@@ -36,8 +37,8 @@ public class ConsultarFingerCommand extends BaseCommand{
             System.out.println("Su tabla finger es");
             System.out.println("---------------------------------");
             int i = 1;
-            for (Map.Entry<Integer, Long> entry : nodo.getTabla().entrySet()) {
-                System.out.println("i: " + entry.getKey() + " Value: " + entry.getValue());
+            for (Map.Entry<Integer, NodoRF> entry : nodo.getTabla().entrySet()) {
+                System.out.println("i: " + entry.getKey() + " Value: " + entry.getValue().getHash().longValue());
             }
         }else {
             System.out.println("Usted es un fantasma!. Esta funcion no esta disponible");

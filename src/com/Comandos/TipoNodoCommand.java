@@ -45,6 +45,7 @@ public class TipoNodoCommand extends BaseCommand {
             try {
                 NodoRF mynodorf = new NodoRF(Nodo.obtenerInstancia().getDireccion(),Nodo.getInstancia().getPuertopeticion());
                 ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("addnode",mynodorf,Fantasma.obtenerInstancia()));
+                EjecutarComando.linea("secondplane");
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }

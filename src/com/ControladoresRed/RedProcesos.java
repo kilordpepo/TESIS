@@ -11,6 +11,7 @@ import com.Utils.RespuestaUtils;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.math.BigInteger;
 import java.util.HashMap;
 
 /**
@@ -89,7 +90,7 @@ public class RedProcesos extends Thread {
                 break;
             }
             case"addtable":{
-                    Nodo.getInstancia().setTabla((HashMap<Integer, Long>)mensaje.getData());
+                    Nodo.getInstancia().setTabla((HashMap<Integer, NodoRF>)mensaje.getData());
                     System.out.println("Se ha agregado la tabla de forma exitosa");
                     oos.writeObject("");
                 break;
@@ -117,8 +118,8 @@ public class RedProcesos extends Thread {
                         oos.writeObject(new Mensaje("havefile",Nodo.getInstancia(),Nodo.getInstancia()));
                     }else {
                         System.out.println("redireccionando...");
-                        Long hashnode = Nodo.obtenerInstancia().seleccionarNodo(hash);
-                        Mensaje data = new Mensaje("getip",hashnode,Fantasma.obtenerInstancia());
+                        NodoRF hashnode = Nodo.obtenerInstancia().seleccionarNodo(hash);
+                        Mensaje data = new Mensaje("getip",hashnode.getHash().longValue(),Fantasma.obtenerInstancia());
                         Mensaje respuesta = (Mensaje) ConexionUtils.obtenerInstancia().enviarMensaje(data);
                         NodoRF nodo = (NodoRF) respuesta.getData();
                         if (!nodo.getDireccion().equals(mensaje.getOrigen().getDireccion())){
@@ -135,17 +136,41 @@ public class RedProcesos extends Thread {
             case"resource":{
 
                 Nodo nodo =(Nodo)mensaje.getOrigen();
-                Long hash = (Long)mensaje.getData();
+                Long hash = ((BigInteger)mensaje.getData()).longValue();
                 if (hash<=Nodo.getInstancia().getHash().longValue()) {
                     Nodo.getInstancia().getTablaRecursos().put(nodo, hash);
                     System.out.println("Actualizando tabla de recursos");
                     oos.writeObject("asignado");
-                }else{
-                    Long hashnode = Nodo.obtenerInstancia().seleccionarNodo(hash);
-                    Mensaje ms= new Mensaje("getip",hashnode, Fantasma.obtenerInstancia());
-                    Mensaje respuesta = (Mensaje) ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
+                }else if (!Nodo.getInstancia().isSolicitante()){
+                    System.out.println("Redireccionando asignacion...");
+                    NodoRF hashnode = Nodo.obtenerInstancia().seleccionarNodo(hash);
                     ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("resource",hash,
-                            nodo,(NodoRF)respuesta.getData()));
+                            nodo,hashnode));
+                }else{
+                    Nodo.getInstancia().getTablaRecursos().put(nodo, hash);
+                    System.out.println("Actualizando tabla de recursos");
+                    Nodo.getInstancia().setSolicitante(false);
+                    oos.writeObject("asignado");
+                }
+                break;
+            }
+
+            case"who":{
+
+                Nodo nodo =(Nodo)mensaje.getOrigen();
+                Long hash = (Long)mensaje.getData();
+                Nodo respuesta = Nodo.getInstancia().tieneRecurso(hash);
+                if (respuesta!=null){
+                    oos.writeObject(respuesta);
+                }else if (!Nodo.getInstancia().isSolicitante()){
+                    System.out.println("Redireccionando consulta...");
+                    NodoRF hashnode = Nodo.obtenerInstancia().seleccionarNodo(hash);
+                    ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("who",hash,
+                            nodo,hashnode));
+                }else {
+                    Nodo.getInstancia().setSolicitante(false);
+                    oos.writeObject(respuesta);
+
                 }
                 break;
             }
@@ -159,6 +184,14 @@ public class RedProcesos extends Thread {
                 }
                 break;
             }
+
+            case"share":{
+                System.out.println("Activando comparticion de recursos");
+                Nodo.getInstancia().setCompartir(true);
+                oos.writeObject("");
+                break;
+            }
+
         }
 
     }

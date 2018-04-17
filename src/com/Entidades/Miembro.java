@@ -1,7 +1,10 @@
 package com.Entidades;
 
+import com.Utils.RespuestaUtils;
+
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Universidad Catolica Andres Bello
@@ -47,6 +50,11 @@ public abstract class Miembro implements Serializable {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+        try {
+            this.hash = RespuestaUtils.generarHash(direccion);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
     public BigInteger getHash() {

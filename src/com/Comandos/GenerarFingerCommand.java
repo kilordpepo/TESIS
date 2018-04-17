@@ -3,6 +3,7 @@ package com.Comandos;
 import com.ControladoresRed.ConexionUtils;
 import com.ControladoresRed.Mensaje;
 import com.Entidades.Fantasma;
+import com.Entidades.Nodo;
 import com.Entidades.NodoRF;
 
 import java.io.OutputStream;
@@ -24,20 +25,20 @@ public class GenerarFingerCommand extends BaseCommand {
         Fantasma f= Fantasma.obtenerInstancia();
         int valorFinger;
         int suma=2;
-        HashMap<Integer,Long> tabla = new HashMap<Integer,Long>();
+        HashMap<Integer,NodoRF> tabla = new HashMap<Integer,NodoRF>();
         if (!f.getAnillo().isEmpty()){
-        Long primero = f.getAnillo().get(0).getHash().longValue();
+        NodoRF primero = f.getAnillo().get(0);
         ArrayList<NodoRF> anillo = f.getAnillo();
             try {
                 for (NodoRF nodo : anillo) {
-                    tabla = new HashMap<Integer, Long>();
+                    tabla = new HashMap<Integer, NodoRF>();
                     for (int i = 1; i <= 5; i++) {
                         int indice = 1;
                         valorFinger = nodo.getHash().intValue() + ((int) Math.pow(2, i - 1));
                         for (NodoRF aux : anillo) {
 
                             if (aux.getHash().intValue() >= valorFinger) {
-                                tabla.put(indice, aux.getHash().longValue());
+                                tabla.put(indice, aux);
                                 indice += 1;
                                 break;
                             }
@@ -47,6 +48,10 @@ public class GenerarFingerCommand extends BaseCommand {
                         tabla.put(1, primero);
                     }
                     ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("addtable", tabla, nodo));
+                }
+
+                for(NodoRF nodo: anillo){
+                    ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("share","", nodo));
                 }
             }catch(ConcurrentModificationException e){
 
