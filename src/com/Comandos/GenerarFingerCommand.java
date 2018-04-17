@@ -23,21 +23,20 @@ public class GenerarFingerCommand extends BaseCommand {
     public void ejecutar(String[] args, OutputStream out) {
         Fantasma f= Fantasma.obtenerInstancia();
         int valorFinger;
-        int suma=2;
-        HashMap<Integer,Long> tabla = new HashMap<Integer,Long>();
+        HashMap<Integer,String> tabla = new HashMap<Integer,String>();
         if (!f.getAnillo().isEmpty()){
-        Long primero = f.getAnillo().get(0).getHash().longValue();
+        String primero = f.getAnillo().get(0).getDireccion()+":"+f.getAnillo().get(0).getPuertopeticion();
         ArrayList<NodoRF> anillo = f.getAnillo();
             try {
                 for (NodoRF nodo : anillo) {
-                    tabla = new HashMap<Integer, Long>();
+                    tabla = new HashMap<Integer, String>();
                     for (int i = 1; i <= 5; i++) {
                         int indice = 1;
                         valorFinger = nodo.getHash().intValue() + ((int) Math.pow(2, i - 1));
                         for (NodoRF aux : anillo) {
 
                             if (aux.getHash().intValue() >= valorFinger) {
-                                tabla.put(indice, aux.getHash().longValue());
+                                tabla.put(indice, aux.getDireccion()+":"+aux.getPuertopeticion());
                                 indice += 1;
                                 break;
                             }
