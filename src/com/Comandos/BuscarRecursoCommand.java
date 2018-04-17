@@ -39,19 +39,17 @@ public class BuscarRecursoCommand extends BaseCommand{
     public void ejecutar(String[] args, OutputStream out) {
         try {
             Long hash = RespuestaUtils.generarHash(args[0]).longValue();
-            Long hashnode = Nodo.obtenerInstancia().seleccionarNodo(hash);
+            NodoRF nodo = Nodo.obtenerInstancia().seleccionarNodo(hash);
             //Obtiene la IP y Descarga el archivo
-            Mensaje mensaje = new Mensaje("getip",hashnode,Fantasma.obtenerInstancia());
-            Mensaje respuesta = (Mensaje) ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
-            NodoRF nodo = (NodoRF) respuesta.getData();
-            mensaje = new Mensaje("download",hash,Nodo.getInstancia(),nodo);
-            mensaje = (Mensaje)ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
-            if (mensaje!=null){
-              Nodo nodor = (Nodo)mensaje.getData();
-              EjecutarComando.linea("download "+nodor.getDireccion()+" "+nodor.getPuertopeticion()+" "+hash);
-            }else{
-                System.out.println("Archivo no encontrado");
-            }
+            Nodo.getInstancia().setSolicitante(true);
+            Mensaje mensaje = new Mensaje("who",hash,Nodo.getInstancia(),nodo);
+            Nodo dueno = (Nodo)ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
+                if (dueno!=null){
+                  EjecutarComando.linea("download "+dueno.getDireccion()+" "+dueno.getPuertopeticion()+" "+hash);
+                }else{
+                    System.out.println("Archivo no encontrado");
+                }
+
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

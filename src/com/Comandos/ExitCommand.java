@@ -42,8 +42,7 @@ public class ExitCommand extends BaseCommand {
                 if (mensaje.getFuncion().equals("finalice")){
                     System.exit(0);
                 }
-            }
-            if (SistemaUtil.tipo.equals("fantasma")){
+            }else {
                 System.exit(0);
             }
     }

@@ -24,11 +24,9 @@ public class VerHashRecursoCommand extends BaseCommand {
         System.out.println("--------------------------------------------");
         if (Nodo.getInstancia().getTablaRecursos()!=null) {
             Nodo nodo = Nodo.obtenerInstancia();
-            System.out.println("Su tabla finger es");
-            System.out.println("---------------------------------");
             int i = 1;
             for (Map.Entry<Nodo, Long> entry : nodo.getTablaRecursos().entrySet()) {
-                System.out.println("i: " + entry.getKey() + " Value: " + entry.getValue());
+                System.out.println("Nodo: " + entry.getKey().getDireccion() + " Recurso: " + entry.getValue());
             }
         }else {
             System.out.println("Usted es un fantasma!. Esta funcion no esta disponible");

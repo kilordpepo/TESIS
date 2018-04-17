@@ -1,9 +1,11 @@
 package com.Entidades;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Universidad Catolica Andres Bello
@@ -22,13 +24,15 @@ import java.util.HashMap;
  */
 public class Nodo extends Miembro implements Serializable {
      private int puertoArchivo;
-     private ArrayList<Recurso> cola;
-     private ArrayList<Recurso> recursos;
-     private HashMap<Integer,Long> tablafinger;
-     private HashMap<Nodo,Long> tablaRecursos;
+     private ArrayList<Recurso> cola = new ArrayList<Recurso>();
+     private ArrayList<Recurso> recursos = new ArrayList<Recurso>();
+     private HashMap<Integer,NodoRF> tablafinger = new HashMap<Integer,NodoRF>();
+     private HashMap<Nodo,Long> tablaRecursos = new HashMap<Nodo,Long>();
      private static Nodo instancia;
      private Long enespera;
      private String redireccion;
+     private boolean solicitante;
+     private boolean compartir=false;
 
     private Nodo(){
 
@@ -64,11 +68,11 @@ public class Nodo extends Miembro implements Serializable {
         this.recursos = recursos;
     }
 
-    public HashMap<Integer,Long> getTabla() {
+    public HashMap<Integer,NodoRF> getTabla() {
         return tablafinger;
     }
 
-    public void setTabla(HashMap<Integer,Long> tabla) {
+    public void setTabla(HashMap<Integer,NodoRF> tabla) {
         this.tablafinger = tabla;
     }
 
@@ -96,6 +100,22 @@ public class Nodo extends Miembro implements Serializable {
         this.redireccion = redireccion;
     }
 
+    public boolean isSolicitante() {
+        return solicitante;
+    }
+
+    public void setSolicitante(boolean solicitante) {
+        this.solicitante = solicitante;
+    }
+
+    public boolean isCompartir() {
+        return compartir;
+    }
+
+    public void setCompartir(boolean compartir) {
+        this.compartir = compartir;
+    }
+
     /**
      * Metodo que se encarga de devolver los datos de un nodo determinado dato el identificador
      * en hash de un archivo. Este revisa en la tabla finger quien es el nodo que es probable
@@ -103,22 +123,32 @@ public class Nodo extends Miembro implements Serializable {
      * @param archivohash aplicando funcion hash
      * @return none (si no encontro alguno) o la IP (si lo encuentra)
      */
-    public Long seleccionarNodo(Long archivohash){
-        Long respuesta = new Long(0);
+    public NodoRF seleccionarNodo(Long archivohash){
+        NodoRF respuesta = null;
         Nodo nodo = Nodo.obtenerInstancia();
-        HashMap<Integer,Long> tabla = nodo.getTabla();
+        HashMap<Integer,NodoRF> tabla = nodo.getTabla();
 
         if (tabla!=null) {
-            for (Long item : tabla.values()) {
-                if (archivohash < Math.abs(item)) {
+            for (NodoRF item : tabla.values()) {
+                if (archivohash < Math.abs(item.getHash().longValue())) {
                     respuesta = item;
                 }
             }
-            if (respuesta == 0) {
+            if (respuesta == null) {
                 respuesta = tabla.get(tabla.size());
             }
         }else
             System.out.println("Su tabla finger no se ha generado");
+        return respuesta;
+    }
+
+    public Nodo tieneRecurso(Long archivohash){
+       Nodo respuesta = null;
+
+        for (Map.Entry<Nodo, Long> entry : this.getTablaRecursos().entrySet()) {
+           if (entry.getValue().equals(archivohash))
+            respuesta = entry.getKey();
+        }
         return respuesta;
     }
 
@@ -147,11 +177,11 @@ public class Nodo extends Miembro implements Serializable {
         this.tablaRecursos.put(nodo,valor);
     }
 
-    public HashMap<Integer, Long> getTablafinger() {
+    public HashMap<Integer, NodoRF> getTablafinger() {
         return tablafinger;
     }
 
-    public void setTablafinger(HashMap<Integer, Long> tablafinger) {
+    public void setTablafinger(HashMap<Integer, NodoRF> tablafinger) {
         this.tablafinger = tablafinger;
     }
 
