@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class VerHashRecursoCommand extends BaseCommand {
 
-    public static final String COMMAND_NAME = "listhashr";
+    public static final String COMMAND_NAME = "listshare";
 
     @Override
     public String obtenerNombreComando() {

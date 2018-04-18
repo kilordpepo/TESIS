@@ -18,11 +18,11 @@ public class SegundoPlanoCommand extends AsyncCommand {
 
     @Override
     public void executeOnBackground(String[] args, OutputStream out) {
-        while (true){
-            if(Nodo.getInstancia().isCompartir()){
-                //EjecutarComando.linea("share");
-                Nodo.getInstancia().setCompartir(false);
-            }
-        }
+        //while (true){
+        //    if(Nodo.getInstancia().isCompartir()){
+        //        //EjecutarComando.linea("share");
+        //        Nodo.getInstancia().setCompartir(false);
+        //    }
+       // }
     }
 }

@@ -186,7 +186,6 @@ public class RedProcesos extends Thread {
             }
 
             case"share":{
-                System.out.println("Activando comparticion de recursos");
                 Nodo.getInstancia().setCompartir(true);
                 oos.writeObject("");
                 break;
