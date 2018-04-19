@@ -41,15 +41,27 @@ public class BuscarRecursoCommand extends BaseCommand{
             Long hash = RespuestaUtils.generarHash(args[0]).longValue();
             NodoRF nodo = Nodo.obtenerInstancia().seleccionarNodo(hash);
             //Obtiene la IP y Descarga el archivo
-            Nodo.getInstancia().setSolicitante(true);
+            if (hash > Nodo.obtenerInstancia().getHash().longValue()) {
+                Nodo.getInstancia().setSolicitante(true);
                 Mensaje mensaje = new Mensaje("who", hash, Nodo.getInstancia(), nodo);
                 Nodo dueno = (Nodo) ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
+
                 if (dueno != null) {
                     EjecutarComando.linea("download " + dueno.getDireccion() + " " + dueno.getPuertopeticion() + " " + hash);
                 } else {
                     System.out.println("Archivo no encontrado");
                 }
-
+            }else{
+                Nodo.getInstancia().setSolicitante(true);
+                NodoRF primero = (NodoRF) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("first", Fantasma.obtenerInstancia()));
+                ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("who",hash,
+                        Nodo.getInstancia(), primero));
+                if (primero != null) {
+                    EjecutarComando.linea("download " + primero.getDireccion() + " " + primero.getPuertopeticion() + " " + hash);
+                } else {
+                    System.out.println("Archivo no encontrado");
+                }
+            }
 
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
