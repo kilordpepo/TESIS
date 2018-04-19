@@ -6,6 +6,7 @@ import com.Comandos.RecibirArchivoCommand;
 import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
 import com.Entidades.NodoRF;
+import com.Entidades.Recurso;
 import com.Utils.RespuestaUtils;
 
 import java.io.IOException;
@@ -168,8 +169,14 @@ public class RedProcesos extends Thread {
                         NodoRF hashnode = Nodo.obtenerInstancia().seleccionarNodo(hash);
                         ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("who", hash,
                                 nodo, hashnode));
-                    }else
-                        oos.writeObject(null);
+                    }else{
+                        Recurso recurso = Nodo.obtenerInstancia().buscarRecurso(hash);
+                        if (recurso != null)
+                        oos.writeObject(recurso);
+                        else
+                            oos.writeObject(null);
+                    }
+
                 }else {
                     Nodo.getInstancia().setSolicitante(false);
                     oos.writeObject(respuesta);

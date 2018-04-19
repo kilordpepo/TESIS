@@ -42,13 +42,14 @@ public class BuscarRecursoCommand extends BaseCommand{
             NodoRF nodo = Nodo.obtenerInstancia().seleccionarNodo(hash);
             //Obtiene la IP y Descarga el archivo
             Nodo.getInstancia().setSolicitante(true);
-            Mensaje mensaje = new Mensaje("who",hash,Nodo.getInstancia(),nodo);
-            Nodo dueno = (Nodo)ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
-                if (dueno!=null){
-                  EjecutarComando.linea("download "+dueno.getDireccion()+" "+dueno.getPuertopeticion()+" "+hash);
-                }else{
+                Mensaje mensaje = new Mensaje("who", hash, Nodo.getInstancia(), nodo);
+                Nodo dueno = (Nodo) ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
+                if (dueno != null) {
+                    EjecutarComando.linea("download " + dueno.getDireccion() + " " + dueno.getPuertopeticion() + " " + hash);
+                } else {
                     System.out.println("Archivo no encontrado");
                 }
+
 
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
