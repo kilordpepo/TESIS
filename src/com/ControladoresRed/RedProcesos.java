@@ -92,6 +92,7 @@ public class RedProcesos extends Thread {
             }
             case"addtable":{
                     Nodo.getInstancia().setTabla((HashMap<Integer, NodoRF>)mensaje.getData());
+                    Nodo.obtenerInstancia().getTablaRecursos().clear();
                     System.out.println("Se ha agregado la tabla de forma exitosa");
                     oos.writeObject("");
                 break;
