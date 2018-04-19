@@ -6,6 +6,7 @@ import com.Comandos.RecibirArchivoCommand;
 import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
 import com.Entidades.NodoRF;
+import com.Entidades.Recurso;
 import com.Utils.RespuestaUtils;
 
 import java.io.IOException;
@@ -169,7 +170,7 @@ public class RedProcesos extends Thread {
                                 nodo, hashnode));
                 }else {
                     Nodo.getInstancia().setSolicitante(false);
-                    oos.writeObject(respuesta);
+                    oos.writeObject(null);
                 }
                 break;
             }
