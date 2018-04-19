@@ -135,7 +135,7 @@ public class Nodo extends Miembro implements Serializable {
                 }
             }
             if (respuesta == null) {
-                respuesta = tabla.get(tabla.size());
+                respuesta = tabla.get(tabla.size()-1);
             }
         }else
             System.out.println("Su tabla finger no se ha generado");
