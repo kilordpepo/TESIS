@@ -61,7 +61,6 @@ public class EnviarArchivoCommand  extends AsyncCommand{
      * Este metodo se encarga del envio de archivos al nodo que lo solicite
      */
     public void procesarEnvio(ServerSocket server, Socket connection){
-        System.out.println("Iniciando envio de archivolitshare");
         DataInputStream input;
         BufferedInputStream bis;
         BufferedOutputStream bos;

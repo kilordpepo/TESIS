@@ -57,10 +57,10 @@ public class BuscarRecursoCommand extends BaseCommand{
                 Nodo.getInstancia().setSolicitante(true);
                 NodoRF primero = (NodoRF) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("first", Fantasma.obtenerInstancia()));
                 System.out.println("Le pregunto a "+primero.getDireccion());
-                ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("who",hash,
+                Nodo dueno  = (Nodo) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("who",hash,
                         Nodo.getInstancia(), primero));
-                if (primero != null) {
-                    EjecutarComando.linea("download " + primero.getDireccion() + " " + primero.getPuertopeticion() + " " + hash);
+                if (dueno != null) {
+                    EjecutarComando.linea("download " + dueno.getDireccion() + " " + dueno.getPuertopeticion() + " " + hash);
                 } else {
                     System.out.println("Archivo no encontrado");
                 }
