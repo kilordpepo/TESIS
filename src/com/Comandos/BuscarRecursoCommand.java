@@ -40,7 +40,6 @@ public class BuscarRecursoCommand extends BaseCommand{
         try {
             Long hash = RespuestaUtils.generarHash(args[0]).longValue();
             NodoRF nodo = Nodo.obtenerInstancia().seleccionarNodo(hash);
-            System.out.println("Hash del recurso: "+hash);
             //Obtiene la IP y Descarga el archivo
             if (hash > Nodo.obtenerInstancia().getHash().longValue()) {
                 Nodo.getInstancia().setSolicitante(true);
@@ -53,10 +52,8 @@ public class BuscarRecursoCommand extends BaseCommand{
                     System.out.println("Archivo no encontrado");
                 }
             }else{
-                System.out.println("Busco desde el primero");
                 Nodo.getInstancia().setSolicitante(true);
                 NodoRF primero = (NodoRF) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("first", Fantasma.obtenerInstancia()));
-                System.out.println("Le pregunto a "+primero.getDireccion());
                 Nodo dueno  = (Nodo) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("who",hash,
                         Nodo.getInstancia(), primero));
                 if (dueno != null) {
