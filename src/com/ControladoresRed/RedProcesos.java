@@ -170,7 +170,7 @@ public class RedProcesos extends Thread {
                                 nodo, hashnode));
                 }else {
                     Nodo.getInstancia().setSolicitante(false);
-                    oos.writeObject(respuesta);
+                    oos.writeObject(null);
                 }
                 break;
             }
