@@ -191,6 +191,14 @@ public class RedProcesos extends Thread {
                 break;
             }
 
+            case"first":{
+                if( Fantasma.obtenerInstancia().getAnillo()!= null && !Fantasma.obtenerInstancia().getAnillo().isEmpty())
+                    oos.writeObject(Fantasma.obtenerInstancia().getAnillo().get(0));
+                else
+                    oos.writeObject(null);
+                break;
+            }
+
         }
 
     }

@@ -39,6 +39,12 @@ public class Mensaje implements Serializable {
         this.destino = destino;
         this.origen = origen;
     }
+    public Mensaje (String funcion, Miembro destino){
+        this.funcion=funcion;
+        this.destino=destino;
+        this.data=null;
+
+    }
 
     public String getFuncion() {
         return funcion;
