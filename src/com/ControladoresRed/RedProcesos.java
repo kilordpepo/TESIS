@@ -145,8 +145,15 @@ public class RedProcesos extends Thread {
                 }else if (!Nodo.getInstancia().isSolicitante()){
                     System.out.println("Redireccionando asignacion...");
                     NodoRF hashnode = Nodo.obtenerInstancia().seleccionarNodo(hash);
+                    if (!(hashnode.getDireccion().equals(Nodo.getInstancia().getDireccion()))
+                            &&!(hashnode.getPuertopeticion()==Nodo.obtenerInstancia().getPuertopeticion()))
                     ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("resource",hash,
                             nodo,hashnode));
+                    else{
+                        Nodo.getInstancia().getTablaRecursos().put(nodo, hash);
+                        System.out.println("Actualizando tabla de recursos");
+                        oos.writeObject("asignado");
+                    }
                 }else{
                     Nodo.getInstancia().getTablaRecursos().put(nodo, hash);
                     System.out.println("Actualizando tabla de recursos");
@@ -166,8 +173,13 @@ public class RedProcesos extends Thread {
                 }else if (!Nodo.getInstancia().isSolicitante()){
                     System.out.println("Redireccionando consulta...");
                         NodoRF hashnode = Nodo.obtenerInstancia().seleccionarNodo(hash);
+                    if (!(nodo.getDireccion().equals(Nodo.getInstancia().getDireccion()))
+                            &&!(nodo.getPuertopeticion()==Nodo.obtenerInstancia().getPuertopeticion()))
                         ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("who", hash,
                                 nodo, hashnode));
+                    else{
+                        oos.writeObject(null);
+                    }
                 }else {
                     Nodo.getInstancia().setSolicitante(false);
                     oos.writeObject(null);
