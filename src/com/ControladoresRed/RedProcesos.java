@@ -212,6 +212,12 @@ public class RedProcesos extends Thread {
                 break;
             }
 
+            case"clean":{
+                EjecutarComando.linea("cleanresources " + (String)mensaje.getData());
+                oos.writeObject("");
+                break;
+            }
+
         }
 
     }

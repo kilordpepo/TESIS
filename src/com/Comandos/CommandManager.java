@@ -51,6 +51,7 @@ public class CommandManager {
         registCommand(VerHashRecursoCommand.COMMAND_NAME,VerHashRecursoCommand.class);
         registCommand(InformarRecursosCommand.COMMAND_NAME,InformarRecursosCommand.class);
         registCommand(SegundoPlanoCommand.COMMAND_NAME,SegundoPlanoCommand.class);
+        registCommand(LimpiarRecursosCommand.COMMAND_NAME,LimpiarRecursosCommand.class);
     }
 
     /**
