@@ -43,7 +43,7 @@ public class EliminarNodo extends BaseCommand {
               System.out.println("El nodo " +args[0] + " ha salido de la red");
           }
           else{
-              ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("clean", args[0],nodo));
+              ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("clean", args[0]+":"+args[1],nodo));
           }
       }
         fantasma.getAnillo().remove(index);

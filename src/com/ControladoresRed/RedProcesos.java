@@ -92,7 +92,6 @@ public class RedProcesos extends Thread {
             }
             case"addtable":{
                     Nodo.getInstancia().setTabla((HashMap<Integer, NodoRF>)mensaje.getData());
-                    Nodo.obtenerInstancia().getTablaRecursos().clear();
                     System.out.println("Se ha agregado la tabla de forma exitosa");
                     oos.writeObject("");
                 break;
@@ -213,7 +212,8 @@ public class RedProcesos extends Thread {
             }
 
             case"clean":{
-                EjecutarComando.linea("cleanresources " + (String)mensaje.getData());
+                EjecutarComando.linea("cleanresources " + ((String)mensaje.getData()).split(":")[0] +
+                " " + ((String)mensaje.getData()).split(":")[1]);
                 oos.writeObject("");
                 break;
             }
