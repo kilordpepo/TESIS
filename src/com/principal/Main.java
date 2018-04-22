@@ -3,6 +3,12 @@ package com.principal;
 import com.Comandos.EjecutarComando;
 import com.ControladoresRed.ConexionUtils;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.Enumeration;
 import java.util.Scanner;
 /**
  * Universidad Catolica Andres Bello
@@ -23,7 +29,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        EjecutarComando.linea("loadresources");
+
+
         System.out.println("-----------------------------------------------------------");
         System.out.println("UCAB - Trabajo Especial de Grado");
         System.out.println("Autores: Garry Bruno / Carlos Valero");

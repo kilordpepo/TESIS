@@ -54,7 +54,7 @@ public class RecibirMensajeCommand extends AsyncCommand{
                     recepcion = new ServerSocket(nodo.getPuertopeticion());
                 }
                 while (true) {
-                    System.out.println("ConexionUtils habilitada y en espera...");
+                    //System.out.println("ConexionUtils habilitada y en espera...");
                     Socket recibo = recepcion.accept();
                     ObjectInputStream ois = new ObjectInputStream(recibo.getInputStream());
                     ObjectOutputStream oos = new ObjectOutputStream(recibo.getOutputStream());

@@ -51,6 +51,7 @@ public class CommandManager {
         registCommand(InformarRecursosCommand.COMMAND_NAME,InformarRecursosCommand.class);
         registCommand(SegundoPlanoCommand.COMMAND_NAME,SegundoPlanoCommand.class);
         registCommand(LimpiarRecursosCommand.COMMAND_NAME,LimpiarRecursosCommand.class);
+        registCommand(SeleccionarRedCommand.COMMAND_NAME,SeleccionarRedCommand.class);
     }
 
     /**

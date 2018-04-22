@@ -47,7 +47,7 @@ public class EnviarArchivoCommand  extends AsyncCommand{
             ServerSocket server = new ServerSocket(nodo.getPuertoArchivo());
             while (true)
             {
-                System.out.println("ConexionUtils para archivos habilitada y en espera...");
+                //System.out.println("ConexionUtils para archivos habilitada y en espera...");
                 Socket socket = server.accept();
                 procesarEnvio(server,socket);
             }

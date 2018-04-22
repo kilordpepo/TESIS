@@ -38,21 +38,17 @@ public class TipoNodoCommand extends BaseCommand {
     @Override
     public void ejecutar(String[] args, OutputStream out) {
         if (args[0].equals("miembro")) {
-            SistemaUtil.tipo = "miembro";
-            EjecutarComando.linea("listen");
-            EjecutarComando.linea("listenfile");
+            EjecutarComando.linea("selectnetwork miembro");
             System.out.println("Se ha asignado el tipo de nodo exitosamente");
-            try {
+           try {
                 NodoRF mynodorf = new NodoRF(Nodo.obtenerInstancia().getDireccion(),Nodo.getInstancia().getPuertopeticion());
                 ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("addnode",mynodorf,Fantasma.obtenerInstancia()));
-                EjecutarComando.linea("secondplane");
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
+
                 }else if (args[0].equals("fantasma")) {
-                    SistemaUtil.tipo = "fantasma";
-                    EjecutarComando.linea("network localhost 2000 central");
-                    EjecutarComando.linea("listen");
+                    EjecutarComando.linea("selectnetwork fantasma");
                     System.out.println("Se ha asignado el tipo de nodo exitosamente");
         }else
             write(out,"Este tipo de nodo no existe! ");
