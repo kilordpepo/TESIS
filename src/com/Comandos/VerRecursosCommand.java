@@ -5,7 +5,21 @@ import com.Entidades.Recurso;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 import java.io.OutputStream;
-
+/**
+ * Universidad Catolica Andres Bello
+ * Facultad de Ingenieria
+ * Escuela de Ingenieria Informatica
+ * Trabajo Especial de Grado
+ * ----------------------------------
+ * Tutor:
+ * --------------
+ * Wilmer Pereira
+ *
+ * Autores:
+ * --------------
+ * Garry Bruno
+ * Carlos Valero
+ */
 public class VerRecursosCommand extends BaseCommand {
 
     public static final String COMMAND_NAME="listresources";

@@ -10,7 +10,21 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
-
+/**
+ * Universidad Catolica Andres Bello
+ * Facultad de Ingenieria
+ * Escuela de Ingenieria Informatica
+ * Trabajo Especial de Grado
+ * ----------------------------------
+ * Tutor:
+ * --------------
+ * Wilmer Pereira
+ *
+ * Autores:
+ * --------------
+ * Garry Bruno
+ * Carlos Valero
+ */
 public class GenerarFingerCommand extends BaseCommand {
 
     public static final String COMMAND_NAME = "generarFinger";
