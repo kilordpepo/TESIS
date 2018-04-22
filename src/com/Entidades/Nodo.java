@@ -174,6 +174,15 @@ public class Nodo extends Miembro implements Serializable {
     }
 
     public void agregarRecurso(Nodo nodo, Long valor){
+        boolean existe = false;
+        for (Map.Entry<Nodo, Long> entry : this.getTablaRecursos().entrySet()) {
+            if ((entry.getKey().getDireccion().equals(nodo.getDireccion()))
+                    &&(entry.getKey().getPuertopeticion()==(nodo.getPuertopeticion()))
+                    &&(entry.getValue().equals(valor)))
+                existe = true;
+        }
+
+        if (!existe)
         this.tablaRecursos.put(nodo,valor);
     }
 

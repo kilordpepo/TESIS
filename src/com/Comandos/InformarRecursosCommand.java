@@ -12,7 +12,7 @@ import java.io.OutputStream;
 /**
  * Created by Junior on 17/04/2018.
  */
-public class InformarRecursosCommand extends BaseCommand {
+public class InformarRecursosCommand extends AsyncCommand {
 
     public static final String COMMAND_NAME="share";
 
@@ -21,24 +21,26 @@ public class InformarRecursosCommand extends BaseCommand {
         return COMMAND_NAME;
     }
 
-    @Override
-    public void ejecutar(String[] args, OutputStream out) {
-          for(Recurso recurso : Nodo.getInstancia().getRecursos()) {
-              if (recurso.getHash().longValue() > Nodo.obtenerInstancia().getHash().longValue()) {
-                  NodoRF node = Nodo.obtenerInstancia().seleccionarNodo(recurso.getHash().longValue());
-                  //Obtiene la IP y Descarga el archivo
-                  Nodo.getInstancia().setSolicitante(true);
-                  ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("resource", recurso.getHash(),
-                          Nodo.getInstancia(), node));
-              }
-              else
-                  {
-                      Nodo.getInstancia().setSolicitante(true);
-                  NodoRF primero = (NodoRF) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("first", Fantasma.obtenerInstancia()));
-                  ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("resource", recurso.getHash(),
-                          Nodo.getInstancia(), primero));
-              }
 
-          }
+    @Override
+    public void executeOnBackground(String[] args, OutputStream out) {
+        for(Recurso recurso : Nodo.getInstancia().getRecursos()) {
+            if (recurso.getHash().longValue() > Nodo.obtenerInstancia().getHash().longValue()) {
+                NodoRF node = Nodo.obtenerInstancia().seleccionarNodo(recurso.getHash().longValue());
+                //Obtiene la IP y Descarga el archivo
+                Nodo.getInstancia().setSolicitante(true);
+                ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("resource", recurso.getHash(),
+                        Nodo.getInstancia(), node));
+            }
+            else
+            {
+                Nodo.getInstancia().setSolicitante(true);
+                NodoRF primero = (NodoRF) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("first"
+                        , Fantasma.obtenerInstancia()));
+                ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("resource", recurso.getHash(),
+                        Nodo.getInstancia(), primero));
+            }
+
+        }
     }
 }

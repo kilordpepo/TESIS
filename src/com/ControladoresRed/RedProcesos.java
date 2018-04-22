@@ -139,7 +139,7 @@ public class RedProcesos extends Thread {
                 Nodo nodo =(Nodo)mensaje.getOrigen();
                 Long hash = ((BigInteger)mensaje.getData()).longValue();
                 if (hash<=Nodo.getInstancia().getHash().longValue()) {
-                    Nodo.getInstancia().getTablaRecursos().put(nodo, hash);
+                    Nodo.getInstancia().agregarRecurso(nodo, hash);
                     System.out.println("Actualizando tabla de recursos");
                     oos.writeObject("asignado");
                 }else if (!Nodo.getInstancia().isSolicitante()){
@@ -150,12 +150,12 @@ public class RedProcesos extends Thread {
                     ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("resource",hash,
                             nodo,hashnode));
                     else{
-                        Nodo.getInstancia().getTablaRecursos().put(nodo, hash);
+                        Nodo.getInstancia().agregarRecurso(nodo, hash);
                         System.out.println("Actualizando tabla de recursos");
                         oos.writeObject("asignado");
                     }
                 }else{
-                    Nodo.getInstancia().getTablaRecursos().put(nodo, hash);
+                    Nodo.getInstancia().agregarRecurso(nodo, hash);
                     System.out.println("Actualizando tabla de recursos");
                     Nodo.getInstancia().setSolicitante(false);
                     oos.writeObject("asignado");
@@ -200,6 +200,9 @@ public class RedProcesos extends Thread {
             case"share":{
                 Nodo.getInstancia().setCompartir(true);
                 oos.writeObject("");
+                oos.close();
+                System.out.println("Compartiendo...");
+                EjecutarComando.linea("share");
                 break;
             }
 
