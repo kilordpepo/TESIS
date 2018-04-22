@@ -31,7 +31,6 @@ public class CommandManager {
     private CommandManager() {
         registCommand(ActualizarFingerCommand.COMMAND_NAME, ActualizarFingerCommand.class);
         registCommand(BuscarRecursoCommand.COMMAND_NAME, BuscarRecursoCommand.class);
-        registCommand(DescargarRecursoCommand.COMMAND_NAME, DescargarRecursoCommand.class);
         registCommand(OrganizarAnilloCommand.COMMAND_NAME, OrganizarAnilloCommand.class);
         registCommand(AgregarNodoCommand.COMMAND_NAME,AgregarNodoCommand.class);
         registCommand(EliminarNodo.COMMAND_NAME,EliminarNodo.class);
