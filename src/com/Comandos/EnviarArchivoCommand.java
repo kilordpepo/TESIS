@@ -107,7 +107,7 @@ public class EnviarArchivoCommand  extends AsyncCommand{
                 System.out.println("Envio de Archivo finalizado!");
             }
         }catch ( Exception e ) {
-            //Logger.getLogger(EnviarArchivoCommand.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(EnviarArchivoCommand.class.getName()).log(Level.SEVERE, null, e);
             System.out.println("Envio fallido!");
             try {
                 Mensaje mensaje =(Mensaje) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("deletenode",
