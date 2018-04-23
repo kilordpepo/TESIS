@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -167,7 +168,7 @@ public class RedProcesos extends Thread {
 
                 Nodo nodo =(Nodo)mensaje.getOrigen();
                 Long hash = (Long)mensaje.getData();
-                Nodo respuesta = Nodo.getInstancia().tieneRecurso(hash);
+                ArrayList<Nodo> respuesta = Nodo.getInstancia().tieneRecurso(hash);
                 if (respuesta!=null){
                     oos.writeObject(respuesta);
                 }else if (!Nodo.getInstancia().isSolicitante()){
@@ -218,6 +219,12 @@ public class RedProcesos extends Thread {
                 EjecutarComando.linea("cleanresources " + ((String)mensaje.getData()).split(":")[0] +
                 " " + ((String)mensaje.getData()).split(":")[1]);
                 oos.writeObject("");
+                break;
+            }
+
+            case"size":{
+                Long hashArchivo = (Long)(mensaje.getData());
+                oos.writeObject(Nodo.getInstancia().buscarRecurso(hashArchivo).getTamano());
                 break;
             }
 

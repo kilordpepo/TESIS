@@ -142,12 +142,12 @@ public class Nodo extends Miembro implements Serializable {
         return respuesta;
     }
 
-    public Nodo tieneRecurso(Long archivohash){
-       Nodo respuesta = null;
+    public ArrayList<Nodo> tieneRecurso(Long archivohash){
+       ArrayList<Nodo> respuesta = new ArrayList<Nodo>();
 
         for (Map.Entry<Nodo, Long> entry : this.getTablaRecursos().entrySet()) {
            if (entry.getValue().equals(archivohash))
-            respuesta = entry.getKey();
+            respuesta.add(entry.getKey());
         }
         return respuesta;
     }

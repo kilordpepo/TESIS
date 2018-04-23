@@ -54,7 +54,7 @@ public class RecibirArchivoCommand extends AsyncCommand {
             String ip =args[0];
             int puerto = Integer.parseInt(args[1])+1;
             Long nombre = Long.parseLong(args[2]);
-            System.out.println("Iniciando proceso de descarga de archivo");
+            System.out.println("Iniciando proceso de descarga de archivo");/*
             // Se abre una conexion con Servidor Socket
             Socket cliente = new Socket(ip, puerto);
             cliente.setSoTimeout(5000);
@@ -117,7 +117,7 @@ public class RecibirArchivoCommand extends AsyncCommand {
             //Se cierra la conexion con el servidor de descarga.
             bos.close();
             dis.close();
-            System.out.println("Finalizando proceso de descarga de archivo");
+            System.out.println("Finalizando proceso de descarga de archivo");*/
         } catch (Exception e) {
             //Logger.getLogger(RecibirArchivoCommand.class.getName()).log(Level.SEVERE, null, e);
             System.out.println("Descarga fallida!");

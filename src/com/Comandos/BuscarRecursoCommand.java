@@ -1,6 +1,7 @@
 package com.Comandos;
 
 import com.ControladoresRed.ConexionUtils;
+import com.ControladoresRed.Descargas;
 import com.ControladoresRed.Mensaje;
 import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
@@ -9,6 +10,7 @@ import com.Utils.RespuestaUtils;
 
 import java.io.OutputStream;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 /**
  * Universidad Catolica Andres Bello
@@ -44,20 +46,21 @@ public class BuscarRecursoCommand extends BaseCommand{
             if (hash > Nodo.obtenerInstancia().getHash().longValue()) {
                 Nodo.getInstancia().setSolicitante(true);
                 Mensaje mensaje = new Mensaje("who", hash, Nodo.getInstancia(), nodo);
-                Nodo dueno = (Nodo) ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
-
-                if (dueno != null) {
-                    EjecutarComando.linea("download " + dueno.getDireccion() + " " + dueno.getPuertopeticion() + " " + hash);
+                ArrayList<Nodo> duenos = (ArrayList<Nodo>) ConexionUtils.obtenerInstancia().enviarMensaje(mensaje);
+                if (!duenos.isEmpty()) {
+                    new Descargas(duenos, args[0],hash).start();
+                    //EjecutarComando.linea("download " + duenos.getDireccion() + " " + duenos.getPuertopeticion() + " " + hash);
                 } else {
                     System.out.println("Archivo no encontrado");
                 }
             }else{
                 Nodo.getInstancia().setSolicitante(true);
                 NodoRF primero = (NodoRF) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("first", Fantasma.obtenerInstancia()));
-                Nodo dueno  = (Nodo) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("who",hash,
+                ArrayList <Nodo> duenos  = (ArrayList<Nodo>) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("who",hash,
                         Nodo.getInstancia(), primero));
-                if (dueno != null) {
-                    EjecutarComando.linea("download " + dueno.getDireccion() + " " + dueno.getPuertopeticion() + " " + hash);
+                if (!duenos.isEmpty()) {
+                    new Descargas(duenos, args[0],hash).start();
+                   // EjecutarComando.linea("download " + duenos.getDireccion() + " " + duenos.getPuertopeticion() + " " + hash);
                 } else {
                     System.out.println("Archivo no encontrado");
                 }
