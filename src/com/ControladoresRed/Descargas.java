@@ -4,6 +4,10 @@ import com.Comandos.Descarga;
 import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
 
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Descargas extends Thread {
@@ -63,6 +67,25 @@ public class Descargas extends Thread {
                 }
             }
         }
+
+        if(!error){
+            ArrayList<byte[]> archivo = new ArrayList<byte[]>();
+            for(Descarga descarga: descargas){
+                archivo.addAll(descarga.cuerpo);
+            }
+            try {
+                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("Descargas\\" + archivo));
+                for(byte[] contenido : archivo){
+                    bos.write(contenido);
+                }
+                System.out.println("Descarga finalizada");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 
