@@ -27,7 +27,7 @@ import java.util.ArrayList;
  * Garry Bruno
  * Carlos Valero
  */
-public class DescargarRecursoCommand extends Thread {
+public class Descarga extends Thread {
 
     public ArrayList<byte[]> cuerpo = new ArrayList<byte[]>();
     public int inicial;
@@ -36,7 +36,7 @@ public class DescargarRecursoCommand extends Thread {
     public Long archivo;
     public String estado; // Estados: "F","D","E"
 
-    public DescargarRecursoCommand(int inicial,int terminal,Nodo nodo, Long archivo){
+    public Descarga(int inicial, int terminal, Nodo nodo, Long archivo){
            this.inicial = inicial;
            this.terminal = terminal;
            this.nodo = nodo;
