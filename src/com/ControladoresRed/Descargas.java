@@ -1,13 +1,10 @@
 package com.ControladoresRed;
 
 import com.Comandos.Descarga;
-import com.Entidades.Fantasma;
+import com.Entidades.Fragmento;
 import com.Entidades.Nodo;
 
-import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Descargas extends Thread {
@@ -30,7 +27,7 @@ public class Descargas extends Thread {
     public void run() {
         ArrayList<Nodo> removibles = new ArrayList<Nodo>();
         for (Nodo dueno : duenos) {
-            tamano = (long) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("size", hash, dueno));
+            tamano = (long)(ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("size", hash, dueno)));
             if (tamano != 0)
                 break;
             else
@@ -42,11 +39,16 @@ public class Descargas extends Thread {
         Descarga[] descargas = new Descarga[pedazos];
         int iteraciones = (int) ((tamano / 1024) / pedazos);
         int posInicial = 0;
-        int posFinal = iteraciones;
-        for (int i = 0; i < duenos.size(); i++) {
-            descargas[i] = new Descarga(posInicial, posFinal, duenos.get(i), hash);
+        int posFinal = iteraciones-1;
+        descargas[0] = new Descarga(posInicial, posFinal, duenos.get(0), hash);
+        descargas[0].start();
+        for (int i = 1; i < duenos.size(); i++) {
             posInicial += iteraciones;
-            posFinal += iteraciones;
+            if(i==duenos.size()-1)
+                posFinal += iteraciones+1;
+            else
+                posFinal += iteraciones;
+            descargas[i] = new Descarga(posInicial, posFinal, duenos.get(i), hash);
             descargas[i].start();
         }
         boolean error = false;
@@ -69,15 +71,16 @@ public class Descargas extends Thread {
         }
 
         if(!error){
-            ArrayList<byte[]> archivo = new ArrayList<byte[]>();
+            ArrayList<Fragmento> fichero = new ArrayList<Fragmento>();
             for(Descarga descarga: descargas){
-                archivo.addAll(descarga.cuerpo);
+                fichero.addAll(descarga.cuerpo);
             }
             try {
                 BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("Descargas\\" + archivo));
-                for(byte[] contenido : archivo){
-                    bos.write(contenido);
+                for(Fragmento contenido : fichero){
+                         bos.write(contenido.getPedazo(), 0, contenido.getCantidad());
                 }
+                bos.close();
                 System.out.println("Descarga finalizada");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

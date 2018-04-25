@@ -2,10 +2,7 @@ package com.Comandos;
 
 import com.ControladoresRed.ConexionUtils;
 import com.ControladoresRed.Mensaje;
-import com.Entidades.Fantasma;
-import com.Entidades.Nodo;
-import com.Entidades.NodoRF;
-import com.Entidades.Recurso;
+import com.Entidades.*;
 
 import java.io.*;
 import java.net.Socket;
@@ -29,7 +26,7 @@ import java.util.ArrayList;
  */
 public class Descarga extends Thread {
 
-    public ArrayList<byte[]> cuerpo = new ArrayList<byte[]>();
+    public ArrayList<Fragmento> cuerpo = new ArrayList<Fragmento>();
     public int inicial;
     public int terminal;
     public Nodo nodo;
@@ -89,7 +86,7 @@ public class Descarga extends Thread {
             while ((in = bis.read(receivedData)) != -1) {
                 //bos.write(receivedData, 0, in);
                 if ((this.inicial<=recorrido)&&(recorrido<=this.terminal))
-                this.cuerpo.add(receivedData);
+                this.cuerpo.add(new Fragmento(receivedData,in));
                 l += in;
                 recorrido++;
             }
