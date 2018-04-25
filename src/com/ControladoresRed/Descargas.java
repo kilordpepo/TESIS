@@ -1,7 +1,6 @@
 package com.ControladoresRed;
 
 import com.Comandos.Descarga;
-import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
 
 import java.io.BufferedOutputStream;
@@ -30,7 +29,7 @@ public class Descargas extends Thread {
     public void run() {
         ArrayList<Nodo> removibles = new ArrayList<Nodo>();
         for (Nodo dueno : duenos) {
-            tamano = (long) ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("size", hash, dueno));
+            tamano = (long)(ConexionUtils.obtenerInstancia().enviarMensaje(new Mensaje("size", hash, dueno)));
             if (tamano != 0)
                 break;
             else
@@ -43,10 +42,15 @@ public class Descargas extends Thread {
         int iteraciones = (int) ((tamano / 1024) / pedazos);
         int posInicial = 0;
         int posFinal = iteraciones-1;
-        for (int i = 0; i < duenos.size(); i++) {
-            descargas[i] = new Descarga(posInicial, posFinal, duenos.get(i), hash);
+        descargas[0] = new Descarga(posInicial, posFinal, duenos.get(0), hash);
+        descargas[0].start();
+        for (int i = 1; i < duenos.size(); i++) {
             posInicial += iteraciones;
-            posFinal += iteraciones;
+            if(i==duenos.size()-1)
+                posFinal += iteraciones+1;
+            else
+                posFinal += iteraciones;
+            descargas[i] = new Descarga(posInicial, posFinal, duenos.get(i), hash);
             descargas[i].start();
         }
         boolean error = false;
