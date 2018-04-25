@@ -42,7 +42,7 @@ public class Descargas extends Thread {
         Descarga[] descargas = new Descarga[pedazos];
         int iteraciones = (int) ((tamano / 1024) / pedazos);
         int posInicial = 0;
-        int posFinal = iteraciones;
+        int posFinal = iteraciones-1;
         for (int i = 0; i < duenos.size(); i++) {
             descargas[i] = new Descarga(posInicial, posFinal, duenos.get(i), hash);
             posInicial += iteraciones;
@@ -69,15 +69,16 @@ public class Descargas extends Thread {
         }
 
         if(!error){
-            ArrayList<byte[]> archivo = new ArrayList<byte[]>();
+            ArrayList<byte[]> fichero = new ArrayList<byte[]>();
             for(Descarga descarga: descargas){
-                archivo.addAll(descarga.cuerpo);
+                fichero.addAll(descarga.cuerpo);
             }
             try {
                 BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("Descargas\\" + archivo));
-                for(byte[] contenido : archivo){
+                for(byte[] contenido : fichero){
                     bos.write(contenido);
                 }
+                bos.close();
                 System.out.println("Descarga finalizada");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
