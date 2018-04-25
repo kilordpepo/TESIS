@@ -8,6 +8,8 @@ import java.io.*;
 import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Universidad Catolica Andres Bello
@@ -31,6 +33,7 @@ public class Descarga extends Thread {
     public int terminal;
     public Nodo nodo;
     public Long archivo;
+
     public String estado; // Estados: "F","D","E"
 
     public Descarga(int inicial, int terminal, Nodo nodo, Long archivo){
@@ -70,33 +73,26 @@ public class Descarga extends Thread {
             d[0] = d[0].substring(d[0].indexOf('\\') + 1, d[0].length());
             //La data recibida, vendran en paquetes de 1024 bytes.
             receivedData = new byte[1024];
-            //Para guardar fichero recibido
-            File descargado = new File("Descargas\\" + d[0]);
             boolean recarga;
 
             recarga=false;
             salidaObjeto.writeObject(0);
-            //bos = new BufferedOutputStream(new FileOutputStream("Descargas\\" + d[0]));
 
             int l = 0;
             boolean partido = true;
-            //Se manejan los datos acerca del libro recibido
             int recorrido =0;
-
             while ((in = bis.read(receivedData)) != -1) {
-                //bos.write(receivedData, 0, in);
-                if ((this.inicial<=recorrido)&&(recorrido<=this.terminal))
-                this.cuerpo.add(new Fragmento(receivedData,in));
+                if ((this.inicial<=recorrido)&&(recorrido<=this.terminal)){
+                    this.cuerpo.add(new Fragmento(receivedData,in));
+                }
                 l += in;
                 recorrido++;
             }
-            //Se cierra la conexion con el servidor de descarga.
-            //bos.close();
             this.estado = "F";
             dis.close();
             System.out.println("Finalizando proceso de descarga de archivo");
         } catch (Exception e) {
-            //Logger.getLogger(RecibirArchivoCommand.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(RecibirArchivoCommand.class.getName()).log(Level.SEVERE, null, e);
             System.out.println("Descarga fallida!");
             this.estado = "E";
             try {

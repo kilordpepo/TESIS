@@ -1,31 +1,32 @@
 package com.Entidades;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 /**
  * Created by Junior on 24/04/2018.
  */
 public class Fragmento {
-    byte[] pedazo;
-    int cantidad;
+    public ByteArrayOutputStream pedazo = new ByteArrayOutputStream();
+    public DataOutputStream w;
 
+    public Fragmento(byte[] arreglo,int in) {
+        try {
+            this.w = new DataOutputStream(this.getPedazo());
+            this.w.write(arreglo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-    public Fragmento(byte[] pedazo, int cantidad) {
-        this.pedazo = pedazo;
-        this.cantidad = cantidad;
     }
 
-    public byte[] getPedazo() {
+    public ByteArrayOutputStream getPedazo() {
         return pedazo;
     }
 
-    public void setPedazo(byte[] pedazo) {
+    public void setPedazo(ByteArrayOutputStream pedazo) {
         this.pedazo = pedazo;
     }
 
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
 }

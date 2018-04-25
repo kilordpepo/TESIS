@@ -59,7 +59,7 @@ public class Descargas extends Thread {
         descargas[0] = new Descarga(posInicial, posFinal, duenos.get(0), hash);
         descargas[0].start();
         for (int i = 1; i < duenos.size(); i++) {
-            posInicial += iteraciones;
+            posInicial += iteraciones+1;
             if(i==duenos.size()-1)
                 posFinal += iteraciones;
             else
@@ -97,8 +97,7 @@ public class Descargas extends Thread {
                 BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("Descargas\\" + archivo));
                 int vuel=0;
                 for(Fragmento contenido : fichero){
-                         bos.write(contenido.getPedazo(), 0, contenido.getCantidad());
-                    System.out.println(vuel);
+                         bos.write(contenido.getPedazo().toByteArray());
                 }
                 bos.close();
                 System.out.println("Descarga finalizada");
