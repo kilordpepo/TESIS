@@ -33,11 +33,13 @@ public class Main {
         Nodo.obtenerInstancia().setPuertopeticion(2003);
         EjecutarComando.linea("listenfile");
         */
+        /*
         try {
             new Descarga(0,13,Nodo.obtenerInstancia(), RespuestaUtils.generarHash("PROMO.pdf").longValue()).run();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+        */
         System.out.println("-----------------------------------------------------------");
         System.out.println("UCAB - Trabajo Especial de Grado");
         System.out.println("Autores: Garry Bruno / Carlos Valero");
