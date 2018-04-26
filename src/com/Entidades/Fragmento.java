@@ -1,5 +1,6 @@
 package com.Entidades;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -9,11 +10,11 @@ import java.io.IOException;
  */
 public class Fragmento {
     public ByteArrayOutputStream pedazo = new ByteArrayOutputStream();
-    public DataOutputStream w;
+    public BufferedOutputStream w;
 
     public Fragmento(byte[] arreglo,int in) {
         try {
-            this.w = new DataOutputStream(this.getPedazo());
+            this.w = new BufferedOutputStream(this.getPedazo());
             this.w.write(arreglo,0,in);
         } catch (IOException e) {
             e.printStackTrace();
