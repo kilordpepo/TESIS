@@ -6,6 +6,7 @@ import com.Entidades.Fantasma;
 import com.Entidades.Nodo;
 import com.Entidades.NodoRF;
 import com.Entidades.Recurso;
+import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -77,32 +78,35 @@ public class EnviarArchivoCommand  extends AsyncCommand{
             File localFile = new File(Nodo.obtenerInstancia().buscarRecurso(Long.parseLong(dt[1])).getRuta());
             re = Nodo.obtenerInstancia().buscarRecurso(Long.parseLong(dt[1]));
             if (re!=null) {
-                bis = new BufferedInputStream(new FileInputStream(localFile));
                 bos = new BufferedOutputStream(connection.getOutputStream());
                 //Enviamos el nombre del fichero
                 DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
                 dos.writeUTF(localFile.getName() + ":" + Integer.toString((int) localFile.length()));
                 int tamano = (int) localFile.length();
                 if ((int) ois.readObject() == 0) {
+                    int inicial = (int) ois.readObject();
+                    int terminal = (int) ois.readObject();
+                    byteArray = new byte[(int)localFile.length()];
+                    byteArray=IOUtils.toByteArray(new FileInputStream(localFile));
                     //Enviamos el fichero
                     re.setTamano(tamano);
-                    byteArray = new byte[(int) localFile.length()];
                     //Mando:
-                    int k = 0;
-                    while ((in = bis.read(byteArray)) != -1) {
-                        bos.write(byteArray, 0, in);
-                        k += in;
+                    byte []pedazo = new byte[terminal-inicial];
+                    int j=0;
+                    for(int i=inicial;i<terminal;i++){
+                        pedazo[j]=byteArray[i];
+                        j++;
                     }
-                } else {
+                    IOUtils.write(pedazo,bos);
+                } /*else {
                     //re.setTamano(tamano);
                     byteArray = new byte[tamano / 2];
                     bis.skip(new Long(tamano / 2));
                     while ((in = bis.read(byteArray, 0, byteArray.length)) != -1) {
                         bos.write(byteArray, 0, in);
                     }
-                }
+                }*/
                 // Se cierra la conexion
-                bis.close();
                 bos.close();
                 System.out.println("Envio de Archivo finalizado!");
             }

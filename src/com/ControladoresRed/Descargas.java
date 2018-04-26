@@ -39,30 +39,15 @@ public class Descargas extends Thread {
         Descarga[] descargas = new Descarga[pedazos];
         System.out.println("Tamano "+tamano);
         System.out.println("Pedazos "+pedazos);
-        int vueltas = (int) (tamano / 1024);
-        System.out.println("Iteraciones "+ vueltas);
         int iteraciones=0;
-        if ((tamano-(vueltas*1024))>0) {
-         iteraciones = (int) ((vueltas + 1) / pedazos);
-         if ((vueltas+1)-(iteraciones*pedazos)>0){
-            iteraciones = iteraciones +1;
-         }
-        }else{
-            iteraciones = (int) ((vueltas) / pedazos);
-            if ((vueltas)-(iteraciones*pedazos)>0){
-                iteraciones = iteraciones +1;
-            }
-        }
+        iteraciones= (int) (tamano/pedazos);
         int posInicial = 0;
         int posFinal = iteraciones;
         System.out.println("Posicion inicial: "+posInicial+" Posicion final:"+posFinal);
         descargas[0] = new Descarga(posInicial, posFinal, duenos.get(0), hash);
         descargas[0].start();
         for (int i = 1; i < duenos.size(); i++) {
-            posInicial += iteraciones+1;
-            if(i==duenos.size()-1)
-                posFinal += iteraciones;
-            else
+            posInicial += iteraciones;
                 posFinal += iteraciones;
             System.out.println("Posicion inicial: "+posInicial+" Posicion final:"+posFinal);
             descargas[i] = new Descarga(posInicial, posFinal, duenos.get(i), hash);
@@ -88,16 +73,17 @@ public class Descargas extends Thread {
         }
 
         if(!error){
-            ArrayList<Fragmento> fichero = new ArrayList<Fragmento>();
+
+            ArrayList<byte[]> fichero = new ArrayList<byte[]>();
 
             for(Descarga descarga: descargas){
-                fichero.addAll(descarga.cuerpo);
+                fichero.add(descarga.cuerpo);
             }
             try {
                 BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("Descargas\\" + archivo));
                 int vuel=0;
-                for(Fragmento contenido : fichero){
-                         bos.write(contenido.getPedazo().toByteArray());
+                for(byte[] contenido : fichero){
+                         bos.write(contenido);
                 }
                 bos.close();
                 System.out.println("Descarga finalizada");

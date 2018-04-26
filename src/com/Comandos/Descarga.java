@@ -3,6 +3,7 @@ package com.Comandos;
 import com.ControladoresRed.ConexionUtils;
 import com.ControladoresRed.Mensaje;
 import com.Entidades.*;
+import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.net.Socket;
@@ -28,7 +29,7 @@ import java.util.logging.Logger;
  */
 public class Descarga extends Thread {
 
-    public ArrayList<Fragmento> cuerpo = new ArrayList<Fragmento>();
+    public byte[] cuerpo;
     public int inicial;
     public int terminal;
     public Nodo nodo;
@@ -41,6 +42,7 @@ public class Descarga extends Thread {
            this.terminal = terminal;
            this.nodo = nodo;
            this.archivo = archivo;
+           cuerpo= new byte[terminal-inicial];
     }
 
     public void run(){
@@ -60,7 +62,7 @@ public class Descarga extends Thread {
             this.estado = "D";
             // Se abre una conexion con Servidor Socket
             Socket cliente = new Socket(ip, puerto);
-            cliente.setSoTimeout(5000);
+            //cliente.setSoTimeout(5000);
             ObjectOutputStream salidaObjeto = new ObjectOutputStream(cliente.getOutputStream());
             //Solicito el archivo:
             salidaObjeto.writeObject("4:" + nombre+":"+Nodo.getInstancia().getDireccion()
@@ -72,22 +74,19 @@ public class Descarga extends Thread {
             d = file.split(":");
             d[0] = d[0].substring(d[0].indexOf('\\') + 1, d[0].length());
             //La data recibida, vendran en paquetes de 1024 bytes.
-            receivedData = new byte[1024];
+            receivedData = new byte[terminal-inicial];
             boolean recarga;
 
             recarga=false;
             salidaObjeto.writeObject(0);
 
+            salidaObjeto.writeObject(inicial);
+            salidaObjeto.writeObject(terminal);
             int l = 0;
             boolean partido = true;
             int recorrido =0;
-            while ((in = bis.read(receivedData)) != -1) {
-                if ((this.inicial<=recorrido)&&(recorrido<=this.terminal)){
-                    this.cuerpo.add(new Fragmento(receivedData,in));
-                }
-                l += in;
-                recorrido++;
-            }
+            IOUtils.read(bis,receivedData);
+            cuerpo=receivedData;
             this.estado = "F";
             dis.close();
             System.out.println("Finalizando proceso de descarga de archivo");
