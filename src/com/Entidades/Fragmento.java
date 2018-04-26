@@ -15,6 +15,7 @@ public class Fragmento {
         try {
             this.w = new DataOutputStream(this.getPedazo());
             this.w.write(arreglo);
+            this.w.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
