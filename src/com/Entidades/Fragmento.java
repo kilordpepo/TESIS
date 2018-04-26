@@ -14,8 +14,7 @@ public class Fragmento {
     public Fragmento(byte[] arreglo,int in) {
         try {
             this.w = new DataOutputStream(this.getPedazo());
-            this.w.write(arreglo);
-            this.w.flush();
+            this.w.write(arreglo,0,in);
         } catch (IOException e) {
             e.printStackTrace();
         }
