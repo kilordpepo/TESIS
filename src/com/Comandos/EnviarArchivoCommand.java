@@ -98,14 +98,7 @@ public class EnviarArchivoCommand  extends AsyncCommand{
                         j++;
                     }
                     IOUtils.write(pedazo,bos);
-                } /*else {
-                    //re.setTamano(tamano);
-                    byteArray = new byte[tamano / 2];
-                    bis.skip(new Long(tamano / 2));
-                    while ((in = bis.read(byteArray, 0, byteArray.length)) != -1) {
-                        bos.write(byteArray, 0, in);
-                    }
-                }*/
+                }
                 // Se cierra la conexion
                 bos.close();
                 System.out.println("Envio de Archivo finalizado!");
