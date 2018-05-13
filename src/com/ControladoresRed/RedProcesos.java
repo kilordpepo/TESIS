@@ -137,7 +137,6 @@ public class RedProcesos extends Thread {
             }
 
             case"resource":{
-
                 Nodo nodo =(Nodo)mensaje.getOrigen();
                 Long hash = ((BigInteger)mensaje.getData()).longValue();
                 if (hash<=Nodo.getInstancia().getHash().longValue()) {

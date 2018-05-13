@@ -63,7 +63,7 @@ public class RecibirMensajeCommand extends AsyncCommand{
                     //Falta ejecutar acciones dependiendo del mensaje
                     Mensaje data = (Mensaje) mensaje;
                     //Se ejecuta un hilo con el proceso
-                    new RedProcesos(data,ois,oos).run();
+                    new RedProcesos(data,ois,oos).start();
 
                 }
 
