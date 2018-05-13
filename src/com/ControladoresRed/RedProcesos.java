@@ -8,6 +8,7 @@ import com.Entidades.Nodo;
 import com.Entidades.NodoRF;
 import com.Entidades.Recurso;
 import com.Utils.RespuestaUtils;
+import com.Utils.SistemaUtil;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -46,6 +47,7 @@ public class RedProcesos extends Thread {
 
     public void run(){
         try {
+            System.out.println("Funcion: "+this.mensaje.getFuncion()+" Tiempo de llegada: "+SistemaUtil.obtenerHora());
             this.realizarAccion(this.mensaje,this.ois,this.oos);
         } catch (IOException e) {
             e.printStackTrace();
@@ -141,7 +143,7 @@ public class RedProcesos extends Thread {
                 Long hash = ((BigInteger)mensaje.getData()).longValue();
                 if (hash<=Nodo.getInstancia().getHash().longValue()) {
                     Nodo.getInstancia().agregarRecurso(nodo, hash);
-                    System.out.println("Actualizando tabla de recursos");
+                   // System.out.println("Actualizando tabla de recursos");
                     oos.writeObject("asignado");
                 }else if (!Nodo.getInstancia().isSolicitante()){
                     System.out.println("Redireccionando asignacion...");
@@ -152,12 +154,12 @@ public class RedProcesos extends Thread {
                             nodo,hashnode));
                     else{
                         Nodo.getInstancia().agregarRecurso(nodo, hash);
-                        System.out.println("Actualizando tabla de recursos");
+                        //System.out.println("Actualizando tabla de recursos");
                         oos.writeObject("asignado");
                     }
                 }else{
                     Nodo.getInstancia().agregarRecurso(nodo, hash);
-                    System.out.println("Actualizando tabla de recursos");
+                    //System.out.println("Actualizando tabla de recursos");
                     Nodo.getInstancia().setSolicitante(false);
                     oos.writeObject("asignado");
                 }
