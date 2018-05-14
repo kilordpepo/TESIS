@@ -45,11 +45,10 @@ public class GenerarFingerCommand extends BaseCommand {
             try {
                 for (NodoRF nodo : anillo) {
                     tabla = new HashMap<Integer, NodoRF>();
+                    int indice = 1;
                     for (int i = 1; i <= 5; i++) {
-                        int indice = 1;
                         valorFinger = nodo.getHash().intValue() + ((int) Math.pow(2, i - 1));
                         for (NodoRF aux : anillo) {
-
                             if (aux.getHash().intValue() >= valorFinger) {
                                 tabla.put(indice, aux);
                                 indice += 1;
